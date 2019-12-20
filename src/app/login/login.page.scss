@@ -1,0 +1,29 @@
+// ion-content {
+//     --ion-background-color: #2196F3;
+// }
+.img{
+    width: auto;
+    margin: auto;
+    display: block;
+  }
+  .head{
+    text-align: center;
+    font-size: 0.9em;
+    color: #124BA3;
+  }
+  .form-control {
+    box-shadow: none;
+    border-color: #ddd;
+  }
+  .text{
+    text-align: center;
+    font-size: 0.9em;
+    color: black;
+  }
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+  }

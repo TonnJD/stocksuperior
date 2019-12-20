@@ -8,16 +8,33 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { WebserviceService } from '../app/webservice.service';
+import { OverviewinfoPageModule } from '../app/page/overviewinfo/overviewinfo.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports:
+    [BrowserModule,
+      IonicModule.forRoot(),
+      IonicStorageModule.forRoot(),
+      HttpClientModule,
+      OverviewinfoPageModule,
+      IonicModule.forRoot(),
+      AppRoutingModule],
+
+
   providers: [
+    WebserviceService,
+    BarcodeScanner,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

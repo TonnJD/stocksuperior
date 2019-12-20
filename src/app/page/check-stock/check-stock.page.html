@@ -42,8 +42,8 @@
                                           <td> {{item.CustomerName}} </td>
                                           <td> {{item.Status}} </td>
                                           <td> {{item.CreatedDate}} </td> -->
-                              <td> </td>
-                              <td> </td>
+                              <td> เครื่องทำน้ำแข็ง </td>
+                              <td> 150 </td>
                               <td>
                                 <input type="number" [(ngModel)]="No">
                               </td>
@@ -58,6 +58,14 @@
                                           <span class="label label-sm label-danger circle" #lblView
                                           (click)="Delete(item)">ลบ</span> -->
                               <!-- </td> -->
+                          </tbody>
+                          <tbody>
+                            <tr>
+                              <td> เครื่องล้างจาน </td>
+                              <td> 100 </td>
+                              <td>
+                                <input type="number" [(ngModel)]="No">
+                              </td>
                           </tbody>
                         </table>
                       </div>

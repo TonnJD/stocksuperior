@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-check-stock',
@@ -8,15 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class CheckStockPage implements OnInit {
   No = 1;
   stock = [];
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  save() {
-    let a = "a"
-    this.stock.push(a);
-    console.log(this.stock);
-
+  edit() {
+    
+    this.router.navigate(['/check-stock-info']);
   }
 }

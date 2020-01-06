@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController,NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-overviewinfo',
@@ -8,16 +7,14 @@ import { ModalController,NavParams } from '@ionic/angular';
 })
 export class OverviewinfoPage implements OnInit {
   item;
-  constructor(public modalController:ModalController,
-    private navParams: NavParams,) {
-      this.item = (navParams.get('test'))
-      console.log(this.item);
+  No = 1;
+  constructor() {
      }
 
   ngOnInit() {
   }
 
-  close() {
-    this.modalController.dismiss();
+  save(){
+    
   }
 }

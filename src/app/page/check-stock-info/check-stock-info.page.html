@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-          <ion-title>โอนสินค้า</ion-title>
-      </ion-buttons>      
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>   
+      <ion-title>รายละเอียด</ion-title>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -16,9 +16,9 @@
             <div class="portlet-title">
               <div class="caption">
                 <i class="fa fa-cube" style="font-size: 1em;"></i>เช็คสต็อก</div>
-              <!-- <div class="tools">
-                <span class="label label-sm label-info circle" (click)="Edit()"> แก้ไข </span>
-              </div> -->
+              <div class="tools">
+                <span class="label label-sm label-info circle" (click)="save()"> Save </span>
+              </div>
             </div>
             <div class="portlet-body" style="padding: 2px;">
               <div class="tab-content">
@@ -29,12 +29,9 @@
                         <table class="table table-hover">
                           <thead>
                             <tr>
-                              <th> เลขที่ใบโอนรหัสสินค้า </th>
-                              <th> วันที่โอนรหัสสินค้า </th>
-                              <th> ประเภทการโอนรหัส </th>
-                              <th> 	สถานะ </th>
-                              <th> ชื่อลูกค้า </th>
-                              <th> ผู้ออกเอกสาร </th>
+                              <th> ชื่อสินค้า </th>
+                              <th> จำนวนในระบบ </th>
+                              <th> จำนวนจริง </th>
                             </tr>
                           </thead>
                           <tbody>
@@ -45,12 +42,11 @@
                                           <td> {{item.CustomerName}} </td>
                                           <td> {{item.Status}} </td>
                                           <td> {{item.CreatedDate}} </td> -->
-                              <td>  </td>
-                              <td>  </td>
-                              <td>  </td>
-                              <td>  </td>
-                              <td>  </td>
-                              <td>  </td>
+                              <td> เครื่องทำน้ำแข็ง </td>
+                              <td> 150 </td>
+                              <td>
+                                <input type="number" [(ngModel)]="No">
+                              </td>
                               <!-- <td>
                                 <span class="label label-sm label-warning circle">ดู</span>
                               </td> -->
@@ -62,7 +58,15 @@
                                           <span class="label label-sm label-danger circle" #lblView
                                           (click)="Delete(item)">ลบ</span> -->
                               <!-- </td> -->
-                          </tbody>                           
+                          </tbody>
+                          <tbody>
+                            <tr>
+                              <td> เครื่องล้างจาน </td>
+                              <td> 100 </td>
+                              <td>
+                                <input type="number" [(ngModel)]="No">
+                              </td>
+                          </tbody>
                         </table>
                       </div>
                     </div>

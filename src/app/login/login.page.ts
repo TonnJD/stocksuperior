@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController, Platform, IonList, LoadingController, NavController } from '@ionic/angular';
 import { StorageService, User } from '../storage.service';
 import { WebserviceService } from '../webservice.service';
-
+import { AuthenticationService } from '../auth/authentication.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -31,6 +31,7 @@ export class LoginPage implements OnInit {
     public loadingController: LoadingController,
     public navCtrl: NavController,
     private platform: Platform,
+    private auth: AuthenticationService,
     private storageService: StorageService) {
 
     setTimeout(() => {
@@ -58,6 +59,7 @@ export class LoginPage implements OnInit {
     this.load();
     this.user.email = this.user.email;
     this.user.password = this.user.password;
+    this.user.type = "Stock";
     this.webservice.login(this.user).then(data => {
       this.data = data;
       console.log('Data Returner', this.data);
@@ -102,7 +104,7 @@ export class LoginPage implements OnInit {
     this.storageService.addUser(this.newUser).then(item => {
       this.newUser = <User>{};
     });
-      this.navCtrl.navigateForward(['/menu/overview']);
+      this.auth.login(this.username);
   }
 
   //#endregion

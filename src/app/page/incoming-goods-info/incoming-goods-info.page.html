@@ -1,0 +1,237 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      <ion-title>ใบรับสินค้าเข้า</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container-fluid">
+    <div class="row" style="padding: 5px;">
+      <div class="col-md-12 col-12" style="padding:0px;">
+        <div class="portlet box blue">
+          <div class="portlet-title">
+            <div class="caption">
+              <i class="fa fa-file-text-o"></i>RS 0002/19</div>
+            <div class="tools">
+              <span class="label label-sm label-success circle" (click)="Save()">บันทึก</span>
+            </div>
+          </div>
+          <div class="portlet-body">
+            <div class="tab-content">
+              <div class="tab-pane active">
+                <div class="row">
+                  <div class="col-4">
+                    <ion-list>
+                      <ion-item no-line>
+                        <div class="col-4">
+                          <ion-label color="primary">เลขที่ใบรับสินค้า</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>RS 0002/19</ion-label>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label color="primary">วันที่</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>20/12/2019</ion-label>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label color="primary">ประเภทการรับ</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-select interface="popover" (ionChange)="onChange($event)">
+                            <!-- <ion-select-option style="text-align: left;" *ngFor="let title of Cus" [value]="title.CustomerID"
+                              [selected]="true">{{title.CustomerName}}</ion-select-option> -->
+                            <ion-select-option>รับเข้าจากต่างประเทศ</ion-select-option>
+                            <ion-select-option>รับเข้าจากต่างประเทศ</ion-select-option>
+                            <ion-select-option>รับเข้าจากต่างประเทศ</ion-select-option>
+                          </ion-select>
+
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label color="primary">ลูกค้า</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-select-option>บริษัท สุพีเรีย ฟู้ด เซอร์วิส จำกัด</ion-select-option>
+                        </div>
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                  <div class="col-4">
+                    <ion-list>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label color="primary">เลขที่ใบสั่งซื้อ</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>PR 0001 / 19</ion-label>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label color="primary">เวลา</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>3:33</ion-label>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label color="primary">แผนก</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-select-option>Operations</ion-select-option>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label color="primary">ผู้ขาย</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-select-option>Vender 1</ion-select-option>
+                        </div>
+                      </ion-item>
+
+                    </ion-list>
+                  </div>
+                  <div class="col-4">
+                    <ion-list>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label color="primary">คลังสินค้า</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>Warehouse A</ion-label>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label color="primary">เลขที่ Lot คลัง</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label></ion-label>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label color="primary">เอกสารอ้างอิง 1</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label></ion-label>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label color="primary">หมายเหตุ</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label></ion-label>
+                        </div>
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-12" style="padding:5px;">
+        <div class="col-4"></div>
+        <div class="col-8">
+        <div class="page-content-inner">
+          <div class="row" style="padding:5px;">
+            <div class="col-12 col-md-12" style="padding: 5px;">
+              <div class="portlet box blue">
+                <div class="portlet-title">
+                  <div class="caption">
+                    <i class="fa fa-cube" style="font-size: 1em;"></i>เช็คสต็อก</div>
+                  <!-- <div class="tools">
+                  <span class="label label-sm label-info circle" (click)="Edit()"> แก้ไข </span>
+                </div> -->
+                </div>
+                <div class="portlet-body" style="padding: 2px;">
+                  <div class="tab-content">
+                    <div class="tab-pane active">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="table-scrollable">
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th> รหัส SKU </th>
+                                  <th> ชื่อรายการ </th>
+                                  <th> Lot/Batch </th>
+                                  <th> รับเข้า </th>
+                                  <th> หน่วย </th>
+                                  <th> สถานะ </th>
+                                  <th> วันหมดอายุ </th>
+                                  <th> หมายเหตุ </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <!-- <tr *ngFor="let item of list; let i = index"> -->
+                                <tr>
+                                  <!-- <td> {{i+1}}</td>
+                                            <td> {{item.ServiceReportNo}} </td>
+                                            <td> {{item.CustomerName}} </td>
+                                            <td> {{item.Status}} </td>
+                                            <td> {{item.CreatedDate}} </td> -->
+                                  <td>
+                                    SPR01 </td>
+                                  <td> Ice machine Crescent Hoshizaki KM115-B </td>
+                                  <td></td>
+                                  <td> 10 </td>
+                                  <td>
+                                    <ion-select>
+                                      <ion-select  [(ngModel)]="Unit">
+                                      </ion-select>
+                                      <ion-select-option [value]="Unit">Pcs</ion-select-option>
+                                    </ion-select>
+                                  </td>
+                                  <td>
+                                    <ion-select>
+                                      <ion-select interface="popover">
+                                      </ion-select>
+                                      <ion-select-option>WA</ion-select-option>
+                                    </ion-select>
+                                  </td>
+                                  <td> 20/12/2020 </td>
+                                  <td>  </td>
+                                  <!-- <td>
+                                  <span class="label label-sm label-warning circle">ดู</span>
+                                </td> -->
+                                  <!-- <td *ngIf="item.Status == 'กำลังดำเนินการ'; else lblView" > 
+                                              <span class="label label-sm label-warning circle" #lblView
+                                              (click)="Detail(item)">แก้ไข</span>
+                                          </td>
+                                          <td *ngIf="item.Status == 'กำลังดำเนินการ'; else lblView" > 
+                                            <span class="label label-sm label-danger circle" #lblView
+                                            (click)="Delete(item)">ลบ</span> -->
+                                  <!-- </td> -->
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

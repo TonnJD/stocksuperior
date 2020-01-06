@@ -13,7 +13,6 @@ import { IonicStorageModule } from '@ionic/storage';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { WebserviceService } from '../app/webservice.service';
-import { OverviewinfoPageModule } from '../app/page/overviewinfo/overviewinfo.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +22,6 @@ import { OverviewinfoPageModule } from '../app/page/overviewinfo/overviewinfo.mo
       IonicModule.forRoot(),
       IonicStorageModule.forRoot(),
       HttpClientModule,
-      OverviewinfoPageModule,
       IonicModule.forRoot(),
       AppRoutingModule],
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Platform, IonList } from '@ionic/angular';
 import { StorageService, User } from '../storage.service';
 import { NavController } from '@ionic/angular';
+import { AuthenticationService } from '../auth/authentication.service';
 
 @Component({
   selector: 'app-setting',
@@ -17,6 +18,7 @@ export class SettingPage implements OnInit {
 
   constructor(private platform: Platform,
     private storageService: StorageService,
+    private authService: AuthenticationService,
     public navCtrl: NavController) { }
 
   ngOnInit() {
@@ -26,8 +28,7 @@ export class SettingPage implements OnInit {
 logout() {
   this.storageService.resetLocalStorage();
   console.log("Logout Finish");
-  this.navCtrl.navigateForward(['/login']);    
-  
+  this.authService.logout();
 }
 //#endregion
 

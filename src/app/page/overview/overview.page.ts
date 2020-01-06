@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../../storage.service';
 import { WebserviceService } from '../../webservice.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController,NavController } from '@ionic/angular';
 import { OverviewinfoPage } from '../overviewinfo/overviewinfo.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-overview',
@@ -23,6 +24,8 @@ export class OverviewPage implements OnInit {
 
   constructor(private storageService: StorageService,
     public webservice: WebserviceService,
+    public navCtrl: NavController,
+    private router: Router,
     public modalController: ModalController) { 
       setTimeout(() => {
         this.ngOnInit();
@@ -65,24 +68,8 @@ export class OverviewPage implements OnInit {
     this.type = "type"
   }
 
-  async View() {
-    const modal = await this.modalController.create({
-      component: OverviewinfoPage,
-      cssClass: 'my-custom-modal-css-stock',
-      componentProps: {
-        item: "this.header",
-        test: "test",
-      }
-    });
-
-    modal.onDidDismiss().then(data => {
-      // this.JobID = data
-      // this.JobID = this.JobID.data
-      // console.log(this.JobID)
-     
-    });
-
-    return await modal.present();
+  View() {
+    this.router.navigate(['/overviewinfo']);
   }
 
 }

@@ -25,6 +25,9 @@
                     <ion-label>{{item.name}}</ion-label>
                   </ion-item> -->
                   <ion-item class="item">
+                    <ion-label>All</ion-label>
+                  </ion-item>
+                  <ion-item class="item">
                     <ion-label>เครื่องทำน้ำแข็ง</ion-label>
                   </ion-item>
                   <ion-item class="item">
@@ -55,9 +58,6 @@
                                                   <td> {{item.CreatedDate}} </td> -->
                                   <td> ไส้กรอง </td>
                                   <td> 2 </td>
-                                  <td>
-                                    <span class="label label-sm label-warning circle" (click)="View()">ดู</span>
-                                  </td>
                                   <!-- <td *ngIf="item.Status == 'กำลังดำเนินการ'; else lblView" > 
                                                     <span class="label label-sm label-warning circle" #lblView
                                                     (click)="Detail(item)">แก้ไข</span>

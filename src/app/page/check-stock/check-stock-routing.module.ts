@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: CheckStockPage
-  }
+  },
+  // {
+  //   path: 'check-stock-info',
+  //   loadChildren: () => import('./check-stock-info/check-stock-info.module').then( m => m.CheckStockInfoPageModule)
+  // }
 ];
 
 @NgModule({

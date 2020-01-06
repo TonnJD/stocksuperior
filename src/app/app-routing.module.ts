@@ -15,6 +15,22 @@ const routes: Routes = [
     path: 'overviewinfo',
     loadChildren: () => import('./page/overviewinfo/overviewinfo.module').then( m => m.OverviewinfoPageModule)
   },
+  {
+    path: 'test',
+    loadChildren: () => import('./test/test.module').then( m => m.TestPageModule)
+  },
+  {
+    path: 'check-stock-info',
+    loadChildren: () => import('./page/check-stock-info/check-stock-info.module').then( m => m.CheckStockInfoPageModule)
+  },
+  {
+    path: 'incoming-goods-info',
+    loadChildren: () => import('./page/incoming-goods-info/incoming-goods-info.module').then( m => m.IncomingGoodsInfoPageModule)
+  },
+  {
+    path: 'tranfer-info',
+    loadChildren: () => import('./page/tranfer-info/tranfer-info.module').then( m => m.TranferInfoPageModule)
+  },
   // {
   //   path: 'overview',
   //   loadChildren: () => import('./page/overview/overview.module').then( m => m.OverviewPageModule)

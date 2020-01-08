@@ -24,7 +24,23 @@
               <div class="tab-content">
                 <div class="tab-pane active">
                   <div class="row"> 
-                    <div class="col-12">
+                    <div class="col-4">
+                      <ion-list style="background-color: white;">
+                        <!-- <ion-item class="item" *ngFor="let item of data" (click)="onChange(item)">
+                          <ion-label>{{item.name}}</ion-label>
+                        </ion-item> -->
+                        <ion-item class="item">
+                          <ion-label>All</ion-label>
+                        </ion-item>
+                        <ion-item class="item">
+                          <ion-label>เครื่องทำน้ำแข็ง</ion-label>
+                        </ion-item>
+                        <ion-item class="item">
+                          <ion-label>เครื่องล้างจาน</ion-label>
+                        </ion-item>
+                      </ion-list>
+                    </div>
+                    <div class="col-8">
                       <div class="table-scrollable">
                         <table class="table table-hover">
                           <thead>

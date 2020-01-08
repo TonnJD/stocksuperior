@@ -13,6 +13,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { WebserviceService } from '../app/webservice.service';
+import  { IncomingGoodsInfoListPageModule } from '../app/page/incoming-goods-info-list/incoming-goods-info-list.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { WebserviceService } from '../app/webservice.service';
       IonicStorageModule.forRoot(),
       HttpClientModule,
       IonicModule.forRoot(),
+      IncomingGoodsInfoListPageModule,
       AppRoutingModule],
 
 

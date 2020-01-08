@@ -4,7 +4,7 @@ import { WebserviceService } from '../../webservice.service';
 import { ModalController,NavController } from '@ionic/angular';
 import { OverviewinfoPage } from '../overviewinfo/overviewinfo.page';
 import { Router } from '@angular/router';
-
+import { AuthenticationService } from '../../auth/authentication.service';
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.page.html',
@@ -26,10 +26,13 @@ export class OverviewPage implements OnInit {
     public webservice: WebserviceService,
     public navCtrl: NavController,
     private router: Router,
+    private auth: AuthenticationService,
     public modalController: ModalController) { 
       setTimeout(() => {
         this.ngOnInit();
       }, 500);
+
+
 
     }
 

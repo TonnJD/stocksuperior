@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-          <ion-title>โอนสินค้า</ion-title>
-      </ion-buttons>      
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-title>โอนสินค้า</ion-title>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -15,15 +15,15 @@
           <div class="portlet box blue">
             <div class="portlet-title">
               <div class="caption">
-                <i class="fa fa-cube" style="font-size: 1em;"></i>เช็คสต็อก</div>
-              <!-- <div class="tools">
-                <span class="label label-sm label-info circle" (click)="Edit()"> แก้ไข </span>
-              </div> -->
+                <i class="fa fa-exchange" style="font-size: 1em;"></i>โอนสินค้า</div>
+              <div class="tools">
+                <span class="label label-sm label-info circle" (click)="Edit('new')"> เพิ่ม </span>
+              </div>
             </div>
             <div class="portlet-body" style="padding: 2px;">
               <div class="tab-content">
                 <div class="tab-pane active">
-                  <div class="row"> 
+                  <div class="row">
                     <div class="col-12">
                       <div class="table-scrollable">
                         <table class="table table-hover">
@@ -32,7 +32,7 @@
                               <th> เลขที่ใบโอนรหัสสินค้า </th>
                               <th> วันที่โอนรหัสสินค้า </th>
                               <th> ประเภทการโอนรหัส </th>
-                              <th> 	สถานะ </th>
+                              <th> สถานะ </th>
                               <th> ชื่อลูกค้า </th>
                               <th> ผู้ออกเอกสาร </th>
                             </tr>
@@ -45,15 +45,16 @@
                                           <td> {{item.CustomerName}} </td>
                                           <td> {{item.Status}} </td>
                                           <td> {{item.CreatedDate}} </td> -->
-                              <td>  </td>
-                              <td>  </td>
-                              <td>  </td>
-                              <td>  </td>
-                              <td>  </td>
-                              <td>  </td>
-                              <!-- <td>
-                                <span class="label label-sm label-warning circle">ดู</span>
-                              </td> -->
+                              <td>1 </td>
+                              <td> 2 </td>
+                              <td> 2 </td>
+                              <td> 2 </td>
+                              <td> 2 </td>
+                              <td> 2 </td>
+                              <td>
+                                <span class="label label-sm label-warning circle" (click)="Edit('edit')">แก้ไข</span>
+                              </td>
+                              <td><span class="label label-sm label-danger circle" (click)="Delete()">ลบ</span></td>
                               <!-- <td *ngIf="item.Status == 'กำลังดำเนินการ'; else lblView" > 
                                             <span class="label label-sm label-warning circle" #lblView
                                             (click)="Detail(item)">แก้ไข</span>
@@ -62,7 +63,7 @@
                                           <span class="label label-sm label-danger circle" #lblView
                                           (click)="Delete(item)">ลบ</span> -->
                               <!-- </td> -->
-                          </tbody>                           
+                          </tbody>
                         </table>
                       </div>
                     </div>

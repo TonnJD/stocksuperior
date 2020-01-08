@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-incoming-goods',
@@ -24,7 +24,38 @@ export class IncomingGoodsPage implements OnInit {
   }
 
   
-  Edit() {
-    this.router.navigate(['/incoming-goods-info']);
+  Edit(type) {
+    if (type == 'new') {
+      let params = {
+        type: "new",
+      }
+  
+      const navigationExtras: NavigationExtras = {
+        queryParams: {
+          data: JSON.stringify(params)
+        }
+      };
+      
+      this.router.navigate(['/incoming-goods-info'],navigationExtras);
+
+    } 
+    else if (type == 'edit') {
+      let params = {
+        type: "edit",
+      }
+  
+      const navigationExtras: NavigationExtras = {
+        queryParams: {
+          data: JSON.stringify(params)
+        }
+      };
+      
+      this.router.navigate(['/incoming-goods-info'],navigationExtras);
+    }
+    
+  }
+
+  Delete(){
+    
   }
 }

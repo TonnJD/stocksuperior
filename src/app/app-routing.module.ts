@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'tranfer-info',
     loadChildren: () => import('./page/tranfer-info/tranfer-info.module').then( m => m.TranferInfoPageModule)
   },
+  {
+    path: 'incoming-goods-info-list',
+    loadChildren: () => import('./page/incoming-goods-info-list/incoming-goods-info-list.module').then( m => m.IncomingGoodsInfoListPageModule)
+  },
   // {
   //   path: 'overview',
   //   loadChildren: () => import('./page/overview/overview.module').then( m => m.OverviewPageModule)

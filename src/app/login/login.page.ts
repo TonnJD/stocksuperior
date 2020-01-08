@@ -39,7 +39,6 @@ export class LoginPage implements OnInit {
     }, 500);
 
     this.user = [];
-
   }
 
   //#region load
@@ -100,11 +99,7 @@ export class LoginPage implements OnInit {
     this.newUser.empID = this.empID;
     this.newUser.role = this.role;
     this.newUser.status = this.status;
-
-    this.storageService.addUser(this.newUser).then(item => {
-      this.newUser = <User>{};
-    });
-      this.auth.login(this.username);
+    this.auth.login(this.newUser);
   }
 
   //#endregion

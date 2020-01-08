@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-check-stock',
@@ -14,8 +14,37 @@ export class CheckStockPage implements OnInit {
   ngOnInit() {
   }
 
-  edit() {
-    
-    this.router.navigate(['/check-stock-info']);
+  edit(type) {
+    if (type == 'new') {
+      let params = {
+        type: "new",
+      }
+
+      const navigationExtras: NavigationExtras = {
+        queryParams: {
+          data: JSON.stringify(params)
+        }
+      };
+
+      this.router.navigate(['/check-stock-info'], navigationExtras);
+
+    }
+    else if (type == 'edit') {
+      let params = {
+        type: "edit",
+      }
+
+      const navigationExtras: NavigationExtras = {
+        queryParams: {
+          data: JSON.stringify(params)
+        }
+      };
+
+      this.router.navigate(['/check-stock-info'], navigationExtras);
+    }
+  }
+
+  delete() {
+
   }
 }

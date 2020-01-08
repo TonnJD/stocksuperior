@@ -1,9 +1,220 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>tranfer-info</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      <ion-title>ใบรับสินค้าเข้า</ion-title>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="container-fluid">
+    <div class="row" style="padding: 5px;">
+      <div class="col-md-12 col-12" style="padding:0px;">
+        <div class="portlet box blue">
+          <div class="portlet-title">
+            <div class="caption">
+              <i class="fa fa-file-text-o"></i>RS 0002/19</div>
+            <div class="tools">
+              <span class="label label-sm label-success circle">บันทึก</span>
+            </div>
+          </div>
+          <div class="portlet-body">
+            <div class="tab-content">
+              <div class="tab-pane active">
+                <div class="row">
+                  <div class="col-4">
+                    <ion-list>
+                      <ion-item no-line>
+                        <ion-label class="col-5" style="padding: 0px;" color="primary">เลขที่ใบโอนสินค้า</ion-label>
+                        <ion-input class="col-7" style="padding: 0px;"></ion-input>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label class="col-5" style="padding: 0px;" color="primary">ประเภทการโอน</ion-label>
+                        <ion-select class="col-7" style="margin: 0px;" interface="popover">
+                          <!-- <ion-select-option style="text-align: left;" *ngFor="let title of Cus" [value]="title.CustomerID"
+                              [selected]="true">{{title.CustomerName}}</ion-select-option> -->
+                          <ion-select-option>Vender => Merchant</ion-select-option>
+                          <ion-select-option>Superior => Vender</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label class="col-5" style="padding: 0px;" color="primary">ลูกค้า</ion-label>
+                        <ion-select class="col-7" style="margin: 0px;" interface="popover">
+                          <ion-select-option>บริษัท สุพีเรีย ฟู้ด เซอร์วิส จำกัด</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                  <div class="col-4">
+                    <ion-list>
+                      <ion-item>
+                        <ion-label color="primary" class="col-5" style="padding: 0px;">วันที่</ion-label>
+                        <ion-input class="col-7" style="padding: 0px;"></ion-input>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label class="col-5" style="padding: 0px;" color="primary">Vender</ion-label>
+                        <ion-select class="col-7" style="margin: 0px;" interface="popover">
+                          <ion-select-option>Vender 1</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                  <div class="col-4">
+                    <ion-list>
+                      <ion-item>
+                        <ion-label class="col-5" style="padding: 0px;" color="primary">เอกสารอ้างอิง</ion-label>
+                        <ion-input class="col-7" style="padding: 0px;" [(ngModel)]="Ref"></ion-input>
+                      </ion-item>
+                      <ion-item>
+                        <ion-label class="col-5" style="padding: 0px;" color="primary">หมายเหตุ</ion-label>
+                        <ion-input class="col-7" style="padding: 0px;"></ion-input>
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-12" style="padding:5px;">
+        <div class="page-content-inner">
+          <div class="row" style="padding:5px;">
+            <div class="col-12 col-md-12" style="padding: 5px;">
+              <div class="portlet box blue">
+                <div class="portlet-title">
+                  <div class="caption">
+                    <i class="fa fa-cube" style="font-size: 1em;"></i>รายการโอนสินค้าเข้า</div>
+                  <!-- <div class="tools">
+                  <span class="label label-sm label-info circle" (click)="Edit()"> แก้ไข </span>
+                </div> -->
+                </div>
+                <div class="portlet-body" style="padding: 2px;">
+                  <div class="tab-content">
+                    <div class="tab-pane active">
+                      <div class="row">
+                        <div class="col-12">
+                          <!-- <ion-item class="item" *ngFor="let item of data" (click)="onChange(item)">
+                              <ion-label>{{item.name}}</ion-label>
+                            </ion-item> -->
+                          <div class="row">
+                            <div class="col-6">
+                              <ion-item>
+                                <ion-label>Serial No</ion-label>
+                                <ion-input type="text" [(ngModel)]="No" ></ion-input>
+                              </ion-item>
+                            </div>
+                            <div class="col-6">
+                              <ion-item>
+                                <ion-label>Asset No</ion-label>
+                                <ion-input type="text" [(ngModel)]="No"></ion-input>
+                              </ion-item>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="tab-content">
+                            <div class="tab-pane active">
+                              <div class="row">
+                                <div class="col-12">
+                                  <div class="table-scrollable">
+                                    <table class="table table-hover">
+                                      <thead>
+                                        <tr>
+                                          <th> Serial No </th>
+                                          <th> Asset No </th>
+                                          <th> รหัส SKU </th>
+                                          <th> ชื่อรายการ </th>
+                                          <th> ยี่ห้อ </th>
+                                          <th> รุ่น </th>
+                                          <th> จำนวน </th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <!-- <tr *ngFor="let item of list; let i = index"> -->
+                                        <tr>
+                                          <!-- <td> {{i+1}}</td>
+                                                      <td> {{item.ServiceReportNo}} </td>
+                                                      <td> {{item.CustomerName}} </td>
+                                                      <td> {{item.Status}} </td>
+                                                      <td> {{item.CreatedDate}} </td> -->
+                                          <td>1 </td>
+                                          <td> 2 </td>
+                                          <td> 2 </td>
+                                          <td> 2 </td>
+                                          <td> 2 </td>
+                                          <td> 2 </td>
+                                          <td>2</td>
+                                          <td>
+                                            <span class="label label-sm label-warning circle" >แก้ไข</span>
+                                          </td>
+                                          <td><span class="label label-sm label-danger circle" >ลบ</span></td>
+                                          <!-- <td *ngIf="item.Status == 'กำลังดำเนินการ'; else lblView" > 
+                                                        <span class="label label-sm label-warning circle" #lblView
+                                                        (click)="Detail(item)">แก้ไข</span>
+                                                    </td>
+                                                    <td *ngIf="item.Status == 'กำลังดำเนินการ'; else lblView" > 
+                                                      <span class="label label-sm label-danger circle" #lblView
+                                                      (click)="Delete(item)">ลบ</span> -->
+                                          <!-- </td> -->
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-12">
+        <div class="tab-content">
+          <div class="tab-pane active">
+            <div class="row">
+              <div class="col-12">
+                <div class="table-scrollable">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th> Serial No </th>
+                        <th> Asset No </th>
+                        <th> รหัส SKU </th>
+                        <th> ชื่อรายการ </th>
+                        <th> ยี่ห้อ </th>
+                        <th> รุ่น </th>
+                        <th> จำนวน </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1 </td>
+                        <td> 2 </td>
+                        <td> 2 </td>
+                        <td> 2 </td>
+                        <td> 2 </td>
+                        <td> 2 </td>
+                        <td>2</td>
+                        <td>
+                          <span class="label label-sm label-warning circle" >แก้ไข</span>
+                        </td>
+                        <td><span class="label label-sm label-danger circle" >ลบ</span></td>
 
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
 </ion-content>

@@ -39,33 +39,17 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <!-- <tr *ngFor="let item of list; let i = index"> -->
-                            <tr>
-                              <!-- <td> {{i+1}}</td>
-                                            <td> {{item.ServiceReportNo}} </td>
-                                            <td> {{item.CustomerName}} </td>
-                                            <td> {{item.Status}} </td>
-                                            <td> {{item.CreatedDate}} </td> -->
-                              <td> RS 0002/19 </td>
-                              <td> 20/12/2562 </td>
-                              <td> รับเข้าจากต่างประเทศ </td>
-                              <td> เสร็จสิ้น </td>
-                              <td> บริษัท สุพีเรีย ฟู้ด เซอร์วิส จำกัด </td>
-                              <td> Vender 1 </td>
-                              <td> Stock </td>
+                            <tr *ngFor="let item of list; let i = index"> 
+                            
+                              <td>{{item.OrderNo}} {{item.OrderDateString}}</td>
+                              <td> {{item.OrderDate}} </td>
+                              <td> {{item.DocumentTypeName}} </td>
+                              <td> {{item.ProcessStatusName}} </td>
+                              <td> {{item.CustomerName}} </td>
+                              <td> {{item.VenderName}} </td>
+                              <td> {{item.Name}} </td>
                               <td> <span class="label label-sm label-warning circle" (click)="Edit('edit')"> แก้ไข </span> </td>
-                              <td> <span class="label label-sm label-danger circle" (click)="Delete()"> ลบ </span> </td>
-                              <!-- <td>
-                                  <span class="label label-sm label-warning circle">ดู</span>
-                                </td> -->
-                              <!-- <td *ngIf="item.Status == 'กำลังดำเนินการ'; else lblView" > 
-                                              <span class="label label-sm label-warning circle" #lblView
-                                              (click)="Detail(item)">แก้ไข</span>
-                                          </td>
-                                          <td *ngIf="item.Status == 'กำลังดำเนินการ'; else lblView" > 
-                                            <span class="label label-sm label-danger circle" #lblView
-                                            (click)="Delete(item)">ลบ</span> -->
-                              <!-- </td> -->
+                              <td> <span class="label label-sm label-danger circle" (click)="Delete()"> ลบ </span> </td>                             
                           </tbody>
                         </table>
                       </div>

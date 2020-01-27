@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,NavigationExtras } from '@angular/router';
+import { WebserviceService } from '../../webservice.service';
 
 @Component({
   selector: 'app-tranfer',
@@ -7,13 +8,21 @@ import { Router,NavigationExtras } from '@angular/router';
   styleUrls: ['./tranfer.page.scss'],
 })
 export class TranferPage implements OnInit {
-
-  constructor(private router: Router) { }
+  list;
+  constructor(private router: Router,
+    private webserviceService:WebserviceService) { }
 
   ngOnInit() {
+    let params = {
+      type: "tranferList",
+    }
+    this.webserviceService.tranfer(params).then(list => {
+    this.list = list;
+    console.log(this.list);      
+    });
   }
 
-  Edit(type){
+  Edit(type,item){
     if (type == 'new') {
       let params = {
         type: "new",
@@ -31,6 +40,7 @@ export class TranferPage implements OnInit {
     else if (type == 'edit') {
       let params = {
         type: "edit",
+        item:item
       }
   
       const navigationExtras: NavigationExtras = {

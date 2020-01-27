@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,NavigationExtras } from '@angular/router';
-
+import { WebserviceService } from '../../webservice.service';
 @Component({
   selector: 'app-incoming-goods',
   templateUrl: './incoming-goods.page.html',
@@ -9,11 +9,19 @@ import { Router,NavigationExtras } from '@angular/router';
 export class IncomingGoodsPage implements OnInit {
   No = 1;
   stock = [];
-
+  list;
   
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private webserviceService:WebserviceService) { }
 
   ngOnInit() {
+    let params = {
+      type: "incomingList",
+    }
+    this.webserviceService.incoming(params).then(list => {
+    this.list = list;
+    console.log(this.list);      
+    });
   }
 
   save() {

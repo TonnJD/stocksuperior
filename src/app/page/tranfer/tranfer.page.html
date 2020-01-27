@@ -33,36 +33,24 @@
                               <th> วันที่โอนรหัสสินค้า </th>
                               <th> ประเภทการโอนรหัส </th>
                               <th> สถานะ </th>
-                              <th> ชื่อลูกค้า </th>
+                              <th> หมายเหตุ </th>
                               <th> ผู้ออกเอกสาร </th>
                             </tr>
                           </thead>
                           <tbody>
-                            <!-- <tr *ngFor="let item of list; let i = index"> -->
-                            <tr>
-                              <!-- <td> {{i+1}}</td>
-                                          <td> {{item.ServiceReportNo}} </td>
-                                          <td> {{item.CustomerName}} </td>
-                                          <td> {{item.Status}} </td>
-                                          <td> {{item.CreatedDate}} </td> -->
-                              <td>1 </td>
-                              <td> 2 </td>
-                              <td> 2 </td>
-                              <td> 2 </td>
-                              <td> 2 </td>
-                              <td> 2 </td>
+                            <tr *ngFor="let item of list; let i = index"> 
+                            
+                              <td>{{item.RunningNo1}} {{item.TransferNo}}/{{item.TransferDateString}}</td>
+                              <td> {{item.TransferDate}} </td>
+                              <td> {{item.DocumentTypeName}} </td>
+                              <td> {{item.ProcessStatusName}} </td>
+                              <td> {{item.Comment}} </td>
+                              <td> {{item.Name}} </td>
                               <td>
-                                <span class="label label-sm label-warning circle" (click)="Edit('edit')">แก้ไข</span>
+                                <span class="label label-sm label-warning circle" (click)="Edit('edit',item)">แก้ไข</span>
                               </td>
                               <td><span class="label label-sm label-danger circle" (click)="Delete()">ลบ</span></td>
-                              <!-- <td *ngIf="item.Status == 'กำลังดำเนินการ'; else lblView" > 
-                                            <span class="label label-sm label-warning circle" #lblView
-                                            (click)="Detail(item)">แก้ไข</span>
-                                        </td>
-                                        <td *ngIf="item.Status == 'กำลังดำเนินการ'; else lblView" > 
-                                          <span class="label label-sm label-danger circle" #lblView
-                                          (click)="Delete(item)">ลบ</span> -->
-                              <!-- </td> -->
+                             
                           </tbody>
                         </table>
                       </div>

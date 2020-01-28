@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>เพิ่มรายการ</ion-title>
+    <ion-buttons slot="primary">
+      <ion-icon slot="end" name="close" (click)="closeModal()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="tab-content">
+    <div class="tab-pane active">
+      <div class="row"> 
+        <div class="col-12">
+          <div class="table-scrollable">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th> ตำแหน่ง </th>
+                  <th> เลขที่ใบรับสินค้า </th>
+                  <th> รหัส SKU </th>
+                  <th> รายละเอียดสินค้า </th>
+                  <th> Lot / Batch </th>
+                  <th> จำนวนเบิก </th>
+                  <th> คงเหลือ </th>
+                  <th> สถานะสินค้า </th>
+                  <th> วันหมดอายุ </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of ListTranferDetail; let i = index">
+                
+                  <td> {{item.LocationName}}</td>
+                              <td> {{item.OrderNo}} </td>
+                              <td> {{item.SKUCode}} </td>
+                              <td> {{item.SKUName}} </td>
+                              <td> {{item.LotNo}} </td> 
+                              <td> <ion-input name="No" [(ngModel)]="item.Amount" type="number"></ion-input> </td> 
+                              <td> {{item.Qty}} </td> 
+                              <td> {{item.ProductStatus}} </td> 
+                              <td> {{item.ExpDate}} </td> 
+                  <td><i class="fa fa-check" style="font-size: 1em;" (click)="addItem(item)"></i> </td>
+                                 
+              </tbody>                           
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane active">
+      <div class="row"> 
+        <div class="col-12">
+          <div class="table-scrollable">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th> ตำแหน่ง </th>
+                  <th> เลขที่ใบรับสินค้า </th>
+                  <th> รหัส SKU </th>
+                  <th> รายละเอียดสินค้า </th>
+                  <th> Lot / Batch </th>
+                  <th> จำนวนเบิก </th>
+                  <th> คงเหลือ </th>
+                  <th> สถานะสินค้า </th>
+                  <th> วันหมดอายุ </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of listpopup; let i = index">
+                
+                  <td> {{item.LocationName}}</td>
+                              <td> {{item.OrderNo}} </td>
+                              <td> {{item.SKUCode}} </td>
+                              <td> {{item.SKUName}} </td>
+                              <td> {{item.LotNo}} </td> 
+                              <td> {{item.Amount}} </td> 
+                              <td> {{item.Qty}} </td> 
+                              <td> {{item.ProductStatus}} </td> 
+                              <td> {{item.ExpDate}} </td> 
+                  <td><i class="fa fa-check" style="font-size: 1em;" (click)="addItem(item)"></i> </td>
+                                 
+              </tbody>                           
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="label label-sm label-success circle" (click)="submit()">บันทึก</span>
+</ion-content>

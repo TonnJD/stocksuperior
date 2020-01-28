@@ -26,6 +26,7 @@ export class TranferPage implements OnInit {
     if (type == 'new') {
       let params = {
         type: "new",
+        item:item
       }
   
       const navigationExtras: NavigationExtras = {

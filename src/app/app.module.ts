@@ -14,7 +14,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { WebserviceService } from '../app/webservice.service';
 import  { IncomingGoodsInfoListPageModule } from '../app/page/incoming-goods-info-list/incoming-goods-info-list.module';
-
+import {PopuptranferinfoPageModule } from '../app/popuptranferinfo/popuptranferinfo.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -25,6 +25,7 @@ import  { IncomingGoodsInfoListPageModule } from '../app/page/incoming-goods-inf
       HttpClientModule,
       IonicModule.forRoot(),
       IncomingGoodsInfoListPageModule,
+      PopuptranferinfoPageModule,
       AppRoutingModule],
 
 

@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'incoming-goods-info-list',
     loadChildren: () => import('./page/incoming-goods-info-list/incoming-goods-info-list.module').then( m => m.IncomingGoodsInfoListPageModule)
   },
+  {
+    path: 'popuptranferinfo',
+    loadChildren: () => import('./popuptranferinfo/popuptranferinfo.module').then( m => m.PopuptranferinfoPageModule)
+  },
   // {
   //   path: 'overview',
   //   loadChildren: () => import('./page/overview/overview.module').then( m => m.OverviewPageModule)

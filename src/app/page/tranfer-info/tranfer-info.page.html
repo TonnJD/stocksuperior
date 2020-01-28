@@ -27,17 +27,26 @@
                     <ion-list>
                       <ion-item no-line>
                         <ion-label class="col-5" style="padding: 0px;" color="primary">เลขที่ใบโอนสินค้า</ion-label>
-                        <ion-input class="col-7" style="padding: 0px;"></ion-input>
+                        <ion-select class="col-5" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'run')" [(ngModel)]="run">
+                          <ion-select-option *ngFor="let run of Running" [value]="run.RunningID">{{ run.RunningNo1 }}</ion-select-option>
+                        </ion-select>
+                        <ion-input class="col-2" style="padding: 0px;" [(ngModel)]="TransferNo"></ion-input>
                       </ion-item>
                       <ion-item>
                         <ion-label class="col-5" style="padding: 0px;" color="primary">ประเภทการโอน</ion-label>
-                        <ion-select class="col-7" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'type')" [(ngModel)]="item.DocumentTypeID">
+                        <ion-select *ngIf="type == 'edit'; else edit" #edit class="col-7" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'type')" [(ngModel)]="item.DocumentTypeID">
+                          <ion-select-option *ngFor="let tran of tranfertype" [value]="tran.SystemID">{{ tran.SystemName1 }}</ion-select-option>
+                        </ion-select>
+                        <ion-select *ngIf="type == 'new'; else new" #new class="col-7" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'type')" >
                           <ion-select-option *ngFor="let tran of tranfertype" [value]="tran.SystemID">{{ tran.SystemName1 }}</ion-select-option>
                         </ion-select>
                       </ion-item>
                       <ion-item>
                         <ion-label class="col-5" style="padding: 0px;" color="primary">ลูกค้า</ion-label>
-                        <ion-select class="col-7" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'cus')" [(ngModel)]="item.CustomerID">
+                        <ion-select *ngIf="type == 'edit'; else edit" #edit class="col-7" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'cus')" [(ngModel)]="item.CustomerID">
+                          <ion-select-option *ngFor="let cus of customer" [value]="cus.CustomerID">{{ cus.CustomerName }}</ion-select-option>
+                        </ion-select>
+                        <ion-select *ngIf="type == 'new'; else new" #new class="col-7" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'type')" >
                           <ion-select-option *ngFor="let cus of customer" [value]="cus.CustomerID">{{ cus.CustomerName }}</ion-select-option>
                         </ion-select>
                       </ion-item>
@@ -47,18 +56,27 @@
                     <ion-list>
                       <ion-item>
                         <ion-label color="primary" class="col-5" style="padding: 0px;">วันที่</ion-label>
-                        <ion-input class="col-7" style="padding: 0px;"></ion-input>
+                        <ion-input *ngIf="type == 'edit'; else edit" #edit class="col-5" style="padding: 0px;" [(ngModel)]="item.TransferDate" disable></ion-input>
+                        <ion-input *ngIf="type == 'edit'; else edit" #edit class="col-2" style="padding: 0px;" [(ngModel)]="item.TransferTime" disable></ion-input>
+                        <ion-input *ngIf="type == 'new'; else new" #new class="col-5" style="padding: 0px;" [(ngModel)]="TransferDate" disable></ion-input>
+                        <ion-input *ngIf="type == 'new'; else new" #new class="col-2" style="padding: 0px;" [(ngModel)]="TransferTime" disable></ion-input>
                       </ion-item>
                       <ion-item>
                         <ion-label class="col-5" style="padding: 0px;" color="primary">Vender</ion-label>
-                        <ion-select class="col-7" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'vender')">
-                          <ion-select-option>Vender 1</ion-select-option>
+                        <ion-select *ngIf="type == 'edit'; else edit" #edit class="col-7" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'vender')" [(ngModel)]="item.TechnicianVenderID">
+                          <ion-select-option *ngFor="let ven of TechnicianVender" [value]="ven.SystemID">{{ ven.SystemName1 }}</ion-select-option>
+                        </ion-select>
+                        <ion-select *ngIf="type == 'new'; else new" #new class="col-7" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'vender')">
+                          <ion-select-option *ngFor="let ven of TechnicianVender" [value]="ven.SystemID">{{ ven.SystemName1 }}</ion-select-option>
                         </ion-select>
                       </ion-item>
                       <ion-item>
                         <ion-label class="col-5" style="padding: 0px;" color="primary">ช่าง</ion-label>
-                        <ion-select class="col-7" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'tech')">
-                          <ion-select-option>Vender 1</ion-select-option>
+                        <ion-select *ngIf="type == 'edit'; else edit" #edit class="col-7" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'tech')" [(ngModel)]="item.EmpID">
+                          <ion-select-option *ngFor="let t of EmpID" [value]="t.personID">{{ t.personName }}</ion-select-option>
+                        </ion-select>
+                        <ion-select *ngIf="type == 'new'; else new" #new class="col-7" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'tech')">
+                          <ion-select-option *ngFor="let t of EmpID" [value]="t.personID">{{ t.personName }}</ion-select-option>
                         </ion-select>
                       </ion-item>
                     </ion-list>
@@ -67,11 +85,13 @@
                     <ion-list>
                       <ion-item>
                         <ion-label class="col-5" style="padding: 0px;" color="primary">เอกสารอ้างอิง</ion-label>
-                        <ion-input class="col-7" style="padding: 0px;" [(ngModel)]="Ref"></ion-input>
+                        <ion-input *ngIf="type == 'edit'; else edit" #edit class="col-7" style="padding: 0px;" [(ngModel)]="item.txtRef1"></ion-input>
+                        <ion-input *ngIf="type == 'new'; else new" #new class="col-7" style="padding: 0px;"></ion-input>
                       </ion-item>
                       <ion-item>
                         <ion-label class="col-5" style="padding: 0px;" color="primary">หมายเหตุ</ion-label>
-                        <ion-input class="col-7" style="padding: 0px;"></ion-input>
+                        <ion-input *ngIf="type == 'edit'; else edit" #edit class="col-7" style="padding: 0px;" [(ngModel)]="item.Comment"></ion-input>
+                        <ion-input *ngIf="type == 'new'; else new" #new class="col-7" style="padding: 0px;" ></ion-input>
                       </ion-item>
                     </ion-list>
                   </div>
@@ -98,6 +118,7 @@
                     <div class="tab-pane active">
                       <div class="row">
                         <div class="col-12">
+                          <span class="label label-sm label-success circle" (click)="add()">เพิ่มรายการ</span>
                           <!-- <ion-item class="item" *ngFor="let item of data" (click)="onChange(item)">
                               <ion-label>{{item.name}}</ion-label>
                             </ion-item> -->
@@ -135,11 +156,15 @@
                                           <th> ชื่อรายการ </th>
                                           <th> ยี่ห้อ </th>
                                           <th> รุ่น </th>
-                                          <th> จำนวน </th>
+                                          <th> จำนวนที่โอน </th>
+                                          <th> ตำแหน่งเดิม </th>
+                                          <th> ตำแหน่งใหม่	 </th>
+                                          <th> สถานะปัจจุบัน  </th>
+                                          <th> สถานะสินค้าใหม่ </th>
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        <tr *ngFor="let item of producttranfer; let i = index">
+                                        <tr *ngFor="let item of list; let i = index">
                                           <td>{{item.SerialNo}} </td>
                                           <td>{{item.AssetNo}} </td>
                                           <td>{{item.SKUCode}} </td>
@@ -150,12 +175,12 @@
                                           <td>{{item.OldLocationName}} </td>
                                           <td>{{item.LocationName}} </td>
                                           <td>{{item.OldProductStatusName}} </td>
-                                          <td>{{item.ProductStatusID}} </td>
-                                          <td>{{item.ExpDate}} </td>
-                                          <td>
-                                            <span class="label label-sm label-warning circle">แก้ไข</span>
+                                          <td>{{item.ProductStatusName}} </td>
+                                          <td *ngIf="type == 'new'; else new">
+                                            <span class="label label-sm label-warning circle" #new>แก้ไข</span>
                                           </td>
-                                          <td><span class="label label-sm label-danger circle" (click)="delete(i)">ลบ</span></td>
+                                          <td *ngIf="type == 'new'; else new">
+                                            <span #new class="label label-sm label-danger circle" (click)="delete(i)">ลบ</span></td>
                                           </tr>
                                       </tbody>
                                     </table>

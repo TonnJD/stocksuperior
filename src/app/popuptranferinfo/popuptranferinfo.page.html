@@ -10,7 +10,7 @@
 <ion-content>
   <div class="tab-content">
     <div class="tab-pane active">
-      <div class="row"> 
+      <div class="row">
         <div class="col-12">
           <div class="table-scrollable">
             <table class="table table-hover">
@@ -29,28 +29,34 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of ListTranferDetail; let i = index">
-                
+
                   <td> {{item.LocationName}}</td>
-                              <td> {{item.OrderNo}} </td>
-                              <td> {{item.SKUCode}} </td>
-                              <td> {{item.SKUName}} </td>
-                              <td> {{item.LotNo}} </td> 
-                              <td> <ion-input name="No" [(ngModel)]="item.Amount" type="number"></ion-input> </td> 
-                              <td> {{item.Qty}} </td> 
-                              <td> {{item.ProductStatus}} </td> 
-                              <td> {{item.ExpDate}} </td> 
+                  <td> {{item.OrderNo}} </td>
+                  <td> {{item.SKUCode}} </td>
+                  <td> {{item.SKUName}} </td>
+                  <td> {{item.LotNo}} </td>
+                  <td>
+                    <ion-input name="No" [(ngModel)]="item.Amount" type="number"></ion-input>
+                  </td>
+                  <td> {{item.Qty}} </td>
+                  <td> {{item.ProductStatus}} </td>
+                  <td> {{item.ExpDate}} </td>
                   <td><i class="fa fa-check" style="font-size: 1em;" (click)="addItem(item)"></i> </td>
-                                 
-              </tbody>                           
+
+              </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <ion-item >
+    <ion-label class="text-center">สินค้าที่ต้องการเบิก</ion-label>
+  </ion-item>
+
   <div class="tab-content">
     <div class="tab-pane active">
-      <div class="row"> 
+      <div class="row">
         <div class="col-12">
           <div class="table-scrollable">
             <table class="table table-hover">
@@ -69,24 +75,26 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of listpopup; let i = index">
-                
+
                   <td> {{item.LocationName}}</td>
-                              <td> {{item.OrderNo}} </td>
-                              <td> {{item.SKUCode}} </td>
-                              <td> {{item.SKUName}} </td>
-                              <td> {{item.LotNo}} </td> 
-                              <td> {{item.Amount}} </td> 
-                              <td> {{item.Qty}} </td> 
-                              <td> {{item.ProductStatus}} </td> 
-                              <td> {{item.ExpDate}} </td> 
-                  <td><i class="fa fa-check" style="font-size: 1em;" (click)="addItem(item)"></i> </td>
-                                 
-              </tbody>                           
+                  <td> {{item.OrderNo}} </td>
+                  <td> {{item.SKUCode}} </td>
+                  <td> {{item.SKUName}} </td>
+                  <td> {{item.LotNo}} </td>
+                  <td> {{item.Amount}} </td>
+                  <td> {{item.Qty}} </td>
+                  <td> {{item.ProductStatus}} </td>
+                  <td> {{item.ExpDate}} </td>
+                  <td><i class="fa fa-minus" style="font-size: 1em;" (click)="removeItem(i)"></i> </td>
+
+              </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <span class="label label-sm label-success circle" (click)="submit()">บันทึก</span>
+  <div class="text-center" >
+    <span class="label label-sm label-success circle" (click)="submit()">ตกลง</span>
+  </div>
 </ion-content>

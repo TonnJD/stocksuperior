@@ -27,30 +27,57 @@ listpopup = [];
   }
 
    addItem(item){
-    console.log(item);
+     if (item.Amount == 0) {
+       alert("กรอก")
+     }else if (item.Amount > item.Qty) {
+      alert("เกิน")
+     }else{
+      this.listpopup.push({ 
+        RowID:item.RowID, 
+        OrderItemID:item.OrderItemID,
+        LocationID:item.LocationID,
+        LocationName:item.LocationName, 
+        OrderNo:item.OrderNo,
+        SKUID:item.SKUID,
+        SKUCode:item.SKUCode,
+        SKUName:item.SKUName,
+        LotNo:item.LotNo,
+        Amount:item.Amount,
+        Qty:item.Qty,
+        ProductStatusID:item.ProductStatusID,
+        ProductStatus:item.ProductStatus,
+        ExpDate:item.ExpDate, 
+      });
+      console.log(this.listpopup);
+     }
+    console.log(item);   
     
-    this.listpopup.push({ 
-      RowID:item.RowID, 
-      OrderItemID:item.OrderItemID,
-      LocationID:item.LocationID,
-      LocationName:item.LocationName, 
-      OrderNo:item.OrderNo,
-      SKUID:item.SKUID,
-      SKUCode:item.SKUCode,
-      SKUName:item.SKUName,
-      LotNo:item.LotNo,
-      Amount:item.Amount,
-      Qty:item.Qty,
-      ProductStatusID:item.ProductStatusID,
-      ProductStatus:item.ProductStatus,
-      ExpDate:item.ExpDate, 
-    });
     
   }
 
+  removeItem(index){
+    this.listpopup.splice(index, 1);
+  }
+
   async submit(){
-    console.log(this.listpopup);
+    for (let i = 0; i < this.listpopup.length; i++) {
+      this.list.push({ 
+        AssetNo: this.listpopup[i].AssetNo,
+        SKUCode: this.listpopup[i].SKUCode,
+        SKUName: this.listpopup[i].SKUName,
+        BrandName: this.listpopup[i].BrandName,
+        ProductName: this.listpopup[i].ProductName,
+        Amount: this.listpopup[i].Amount,
+        OldLocationName: this.listpopup[i].OldLocationName,
+        LocationName: this.listpopup[i].LocationName,
+        OldProductStatusName: this.listpopup[i].OldProductStatusName,
+        ProductStatus: this.listpopup[i].ProductStatus,
+        ExpDate: this.listpopup[i].ExpDate
+      });
+    }
     
-    await this.modalController.dismiss(this.listpopup);
+    console.log(this.list);
+    
+    await this.modalController.dismiss(this.list);
   }
 }

@@ -80,7 +80,7 @@ export class TranferInfoPage implements OnInit {
         this.webserviceService.tranfer(params).then(list => {
           this.list = list;
           console.log(this.list);
-        });
+        });        
       }
     });
   }
@@ -168,7 +168,7 @@ systemdata(){
         this.ProductStatusID = this.producttranfer[i].ProductStatusID;
         this.ExpDate = this.producttranfer[i].ExpDate;
       }
-      this.listtranfer.push(
+      this.list.push(
         {
           SerialNo: this.SerialNo,
           AssetNo: this.AssetNo,
@@ -226,23 +226,27 @@ systemdata(){
     }
   }
   delete(index) {
-    this.listtranfer.splice(index, 1);
+    this.list.splice(index, 1);
   }
   ngOnInit() {
   }
 
   save() {
+    
     this.detailtranfer.push({ 
-      cusID: this.cus, 
-      tranfertype: this.typetran,
-      venderID: this.vender,
-      empid:this.tech
+      cusID: this.item.CustomerID, 
+      tranfertype: this.item.DocumentTypeID,
+      venderID: this.item.TechnicianVenderID,
+      empid:this.item.EmpID
     })
+    console.log(this.detailtranfer)
     let params = {
       type: "savetranfer",
-      list: this.listtranfer,
+      list: this.list,
       cus: this.detailtranfer
     }
+    console.log(params);
+    
     this.webserviceService.tranfer(params).then(list => {
       this.producttranfer = list;
       console.log(this.producttranfer);
@@ -262,21 +266,18 @@ systemdata(){
       console.log(this.data);
       
       for (let i = 0; i < this.data.length; i++) {
-        this.listtranfer.push({ 
-          RowID: this.data[i].RowID, 
-          OrderItemID: this.data[i].OrderItemID,
-          LocationID: this.data[i].LocationID,
-          LocationName: this.data[i].LocationName, 
-          OrderNo: this.data[i].OrderNo,
-          SKUID: this.data[i].SKUID,
+        this.list.push({ 
+          SerialNo: this.data[i].SerialNo,
+          AssetNo: this.data[i].AssetNo,
           SKUCode: this.data[i].SKUCode,
           SKUName: this.data[i].SKUName,
-          LotNo: this.data[i].LotNo,
+          BrandName: this.data[i].BrandName,
+          ProductName: this.data[i].ProductName,
           Amount: this.data[i].Amount,
-          Qty: this.data[i].Qty,
-          ProductStatusID: this.data[i].ProductStatusID,
-          ProductStatus: this.data[i].ProductStatus,
-          ExpDate: this.data[i].ExpDate, 
+          OldLocationName: this.data[i].LocationName,
+          OldProductStatusName: this.data[i].OldProductStatusName,
+          ProductStatusName: this.data[i].ProductStatus,
+          ExpDate: this.data[i].ExpDate
         });
       }     
       

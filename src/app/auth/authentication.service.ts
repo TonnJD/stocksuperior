@@ -6,6 +6,7 @@ import { StorageService, User } from '../storage.service';
 
 const TOKEN_KEY = 'auth-token';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -46,10 +47,10 @@ export class AuthenticationService {
   }
 
   login(id) {
-    let name = JSON.stringify(id);
-    return this.storage.set(TOKEN_KEY, name).then(() => {
+    console.log('id',id);    
+    return this.storage.set(TOKEN_KEY, id).then(() => {
       this.authenticationState.next(true);
-      this.saveuser(name);
+      //this.saveuser(name);
     });
   }
 

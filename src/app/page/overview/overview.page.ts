@@ -5,6 +5,10 @@ import { ModalController,NavController } from '@ionic/angular';
 import { OverviewinfoPage } from '../overviewinfo/overviewinfo.page';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../auth/authentication.service';
+import { Storage } from '@ionic/storage';
+
+const TOKEN_KEY = 'auth-token';
+
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.page.html',
@@ -21,9 +25,11 @@ export class OverviewPage implements OnInit {
   device;
   spare;
   type;
-
+  user;
+  memid;
   constructor(private storageService: StorageService,
     public webservice: WebserviceService,
+    private storage: Storage,
     public navCtrl: NavController,
     private router: Router,
     private auth: AuthenticationService,
@@ -32,27 +38,23 @@ export class OverviewPage implements OnInit {
         this.ngOnInit();
       }, 500);
 
-
+     
 
     }
 
  ngOnInit() {
-    this.loadItem();
+   this.getUser();
     this.loadStock();
   }
 
-  loadItem(){
-    this.storageService.getUser().then(items => {
-      this.items = items;
-      console.log(items);
-      for (let i = 0; i < this.items.length; i++) {
-        this.empID = this.items[i].empID;
-        this.name = this.items[i].name
-        this.position = this.items[i].position
-        this.username = this.items[i].username
-        console.log(this.empID,this.name,this.position,this.username);        
-      }
-    });
+  getUser(){
+    this.storage.get(TOKEN_KEY).then(res => {
+      this.memid = res.id
+      this.name = res.name
+      this.username = res.username
+      this.empID = res.emmID    
+      console.log(this.memid);      
+    })
   }
 
   loadStock(){

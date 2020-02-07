@@ -32,7 +32,7 @@ export class IncomingGoodsPage implements OnInit {
   }
 
   
-  Edit(type) {
+  Edit(type,item) {
     if (type == 'new') {
       let params = {
         type: "new",
@@ -50,6 +50,7 @@ export class IncomingGoodsPage implements OnInit {
     else if (type == 'edit') {
       let params = {
         type: "edit",
+        item:item
       }
   
       const navigationExtras: NavigationExtras = {

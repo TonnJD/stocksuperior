@@ -2,7 +2,7 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
-      <ion-title>ใบรับสินค้าเข้า</ion-title>
+      <ion-title>ใบโอนสินค้า</ion-title>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -27,10 +27,12 @@
                     <ion-list>
                       <ion-item no-line>
                         <ion-label class="col-5" style="padding: 0px;" color="primary">เลขที่ใบโอนสินค้า</ion-label>
-                        <ion-select class="col-5" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'run')" [(ngModel)]="run">
+                        <ion-select *ngIf="type == 'new'; else new" #new class="col-5" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'run')" [(ngModel)]="run">
                           <ion-select-option *ngFor="let run of Running" [value]="run.RunningID">{{ run.RunningNo1 }}</ion-select-option>
                         </ion-select>
-                        <ion-input class="col-2" style="padding: 0px;" [(ngModel)]="TransferNo"></ion-input>
+                        <ion-label *ngIf="type == 'edit'; else edit" #edit class="col-2" style="padding: 0px;">{{item.RunningNo1}}</ion-label>
+                        <ion-input *ngIf="type == 'new'; else new" #new class="col-2" style="padding: 0px;" [(ngModel)]="TransferNo"></ion-input>
+                        <ion-label *ngIf="type == 'edit'; else edit" #edit class="col-2" style="padding: 0px;">{{item.TransferNo}}</ion-label>
                       </ion-item>
                       <ion-item>
                         <ion-label class="col-5" style="padding: 0px;" color="primary">ประเภทการโอน</ion-label>
@@ -56,8 +58,8 @@
                     <ion-list>
                       <ion-item>
                         <ion-label color="primary" class="col-5" style="padding: 0px;">วันที่</ion-label>
-                        <ion-input *ngIf="type == 'edit'; else edit" #edit class="col-5" style="padding: 0px;" [(ngModel)]="item.TransferDate" disable></ion-input>
-                        <ion-input *ngIf="type == 'edit'; else edit" #edit class="col-2" style="padding: 0px;" [(ngModel)]="item.TransferTime" disable></ion-input>
+                        <ion-label *ngIf="type == 'edit'; else edit" #edit class="col-5" style="padding: 0px;">{{item.TransferDate}}</ion-label>
+                        <ion-label *ngIf="type == 'edit'; else edit" #edit class="col-2" style="padding: 0px;" >{{item.TransferTime}}</ion-label>
                         <ion-input *ngIf="type == 'new'; else new" #new class="col-5" style="padding: 0px;" [(ngModel)]="TransferDate" disable></ion-input>
                         <ion-input *ngIf="type == 'new'; else new" #new class="col-2" style="padding: 0px;" [(ngModel)]="TransferTime" disable></ion-input>
                       </ion-item>
@@ -118,7 +120,7 @@
                     <div class="tab-pane active">
                       <div class="row">
                         <div class="col-12">
-                          <span class="label label-sm label-success circle" (click)="add()">เพิ่มรายการ</span>
+                          <span class="label label-sm label-success circle pull-right"  (click)="add()">เพิ่มรายการ</span>
                           <!-- <ion-item class="item" *ngFor="let item of data" (click)="onChange(item)">
                               <ion-label>{{item.name}}</ion-label>
                             </ion-item> -->
@@ -179,8 +181,9 @@
                                           <td *ngIf="type == 'new'; else new">
                                             <span class="label label-sm label-warning circle" #new>แก้ไข</span>
                                           </td>
-                                          <td *ngIf="type == 'new'; else new">
-                                            <span #new class="label label-sm label-danger circle" (click)="delete(i)">ลบ</span></td>
+                                          <td >
+                                            <span class="label label-sm label-danger circle" (click)="delete(i)">ลบ</span>
+                                            </td>
                                           </tr>
                                       </tbody>
                                     </table>

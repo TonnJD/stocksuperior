@@ -9,7 +9,7 @@ import { AuthenticationService } from '../auth/authentication.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
+  memid;
   name;
   username;
   position;
@@ -63,12 +63,11 @@ export class LoginPage implements OnInit {
       this.data = data;
       console.log('Data Returner', this.data);
       for (let i = 0; i < this.data.length; i++) {
+        this.memid = this.data[i].memid;
         this.status = this.data[i].Status;
         this.name = this.data[i].Name;
         this.username = this.data[i].Username;
         this.position = this.data[i].Position;
-        this.workall = this.data[i].WorkAll;
-        this.workfinish = this.data[i].WorkFinish;
         this.empID = this.data[i].empID;
         this.role = this.data[i].roleID;
       }
@@ -92,7 +91,7 @@ export class LoginPage implements OnInit {
     this.storageService.resetLocalStorage();
   }
   true() {
-    this.newUser.id = 1;
+    this.newUser.id = this.memid;
     this.newUser.name = this.name;
     this.newUser.username = this.username;
     this.newUser.position = this.position;

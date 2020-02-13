@@ -29,28 +29,11 @@ export class AuthenticationService {
     })
   }
 
-  saveuser(res){
-    this.storageService.resetLocalStorage();
-    this.user = JSON.parse(res);
-    this.newUser.id = 1;
-    this.newUser.name = this.user.name;
-    this.newUser.username = this.user.username;
-    this.newUser.position = this.user.position;
-    this.newUser.empID = this.user.empID;
-    this.newUser.role = this.user.role;
-    this.newUser.status = this.user.status;
-    console.log(this.newUser);
-
-    this.storageService.addUser(this.newUser).then(item => {
-      this.newUser = <User>{};
-    });
-  }
 
   login(id) {
     console.log('id',id);    
     return this.storage.set(TOKEN_KEY, id).then(() => {
       this.authenticationState.next(true);
-      //this.saveuser(name);
     });
   }
 

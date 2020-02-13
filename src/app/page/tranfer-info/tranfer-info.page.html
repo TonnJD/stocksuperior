@@ -27,7 +27,7 @@
                     <ion-list>
                       <ion-item no-line>
                         <ion-label class="col-5" style="padding: 0px;" color="primary">เลขที่ใบโอนสินค้า</ion-label>
-                        <ion-select *ngIf="type == 'new'; else new" #new class="col-5" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'run')" [(ngModel)]="run">
+                        <ion-select *ngIf="type == 'new'; else new" #new class="col-5" style="margin: 0px;" interface="popover" (ionChange)="onChange($event,'run')">
                           <ion-select-option *ngFor="let run of Running" [value]="run.RunningID">{{ run.RunningNo1 }}</ion-select-option>
                         </ion-select>
                         <ion-label *ngIf="type == 'edit'; else edit" #edit class="col-2" style="padding: 0px;">{{item.RunningNo1}}</ion-label>

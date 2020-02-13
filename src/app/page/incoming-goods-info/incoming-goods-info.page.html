@@ -6,6 +6,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<ion-content>
   <div class="container-fluid">
     <div class="row" style="padding: 5px;">
       <div class="col-md-12 col-12" style="padding:0px;">
@@ -25,7 +26,9 @@
                     <ion-list>
                       <ion-item no-line>
                         <ion-label class="col-5" style="padding: 0px;" color="primary">เลขที่ใบรับสินค้า</ion-label>
-                        <ion-label>{{item.OrderNo}}</ion-label>
+                        <ion-label></ion-label>
+                        <ion-label *ngIf="type == 'edit'; else edit" #edit>{{item.OrderNo}}</ion-label>
+                        <ion-label *ngIf="type == 'new'; else new" #new>RS {{OrderNo}}</ion-label>
                       </ion-item>
                       <ion-item>
                         <ion-label class="col-5" style="padding: 0px;" color="primary">วันที่</ion-label>
@@ -62,7 +65,7 @@
                   </div>
                   <div class="col-4">
                     <ion-list>
-                      <ion-item>
+                      <ion-item *ngIf="type == 'edit'; else edit" #edit>
                         <ion-label color="primary" class="col-5" style="padding: 0px;">เลขที่ใบสั่งซื้อ</ion-label>
                         <ion-input class="col-7" style="padding: 0px;"></ion-input>
                       </ion-item>
@@ -87,13 +90,13 @@
                         <ion-label class="col-5" style="padding: 0px;" color="primary">ผู้ขาย</ion-label>
                         <ion-select *ngIf="type == 'edit'; else edit" #edit class="col-7" style="margin: 0px;"
                           interface="popover" (ionChange)="onChange($event,'vender')" [(ngModel)]="item.VenderID">
-                          <ion-select-option [value]="1">Vender 1</ion-select-option>
-                          <ion-select-option [value]="2">Vender 2</ion-select-option>
+                          <ion-select-option *ngFor="let vd of vender" [value]="vd.VenderID">{{ vd.VenderName }}
+                          </ion-select-option>
                         </ion-select>
                         <ion-select *ngIf="type == 'new'; else new" #new class="col-7" style="margin: 0px;"
                           interface="popover" (ionChange)="onChange($event,'vender')">
-                          <ion-select-option [value]="1">Vender 1</ion-select-option>
-                          <ion-select-option [value]="2">Vender 2</ion-select-option>
+                          <ion-select-option *ngFor="let vd of vender" [value]="vd.VenderID">{{ vd.VenderName }}
+                          </ion-select-option>
                         </ion-select>
                       </ion-item>
                     </ion-list>
@@ -104,13 +107,13 @@
                         <ion-label class="col-5" style="padding: 0px;" color="primary">คลังสินค้า</ion-label>
                         <ion-select class="col-7" style="margin: 0px;" interface="popover"
                           (ionChange)="onChange($event,'warehouse')">
-                          <ion-select-option [value]="1">Warehouse 1</ion-select-option>
-                          <ion-select-option [value]="2">Warehouse 2</ion-select-option>
+                          <ion-select-option *ngFor="let wh of warehourse" [value]="wh.SystemID">{{ wh.SystemName1 }}
+                          </ion-select-option>
                         </ion-select>
                         <ion-select class="col-7" style="margin: 0px;" interface="popover"
                           (ionChange)="onChange($event,'warehouse')">
-                          <ion-select-option [value]="1">Warehouse 1</ion-select-option>
-                          <ion-select-option [value]="2">Warehouse 2</ion-select-option>
+                          <ion-select-option *ngFor="let wh of warehourse" [value]="wh.SystemID">{{ wh.SystemName1 }}
+                          </ion-select-option>
                         </ion-select>
                       </ion-item>
                       <ion-item>
@@ -155,14 +158,14 @@
                               <ion-label>{{item.name}}</ion-label>
                             </ion-item> -->
                             <ion-item class="item">
-                              <ion-label >รายการสินค้า</ion-label>
+                              <ion-label (click)="onChangePage('product')">รายการสินค้า</ion-label>
                             </ion-item>
                             <ion-item class="item">
-                              <ion-label>รายการ Serial Number</ion-label>
+                              <ion-label (click)="onChangePage('serial')">รายการ Serial Number</ion-label>
                             </ion-item>
                           </ion-list>
                         </div>
-                        <div class="col-9">
+                        <div class="col-9" *ngIf="page == 1; else product" #product>
                           <div class="pull-right" style="padding: 10px;">
                             <span class="label label-sm label-success circle" (click)="addList()">เพิ่มรายการ</span>
                           </div>
@@ -198,16 +201,68 @@
                                       <ion-select-option>WA</ion-select-option>
                                     </ion-select>
                                   </td>
-                                  <td style="padding-top:15px;"> <ion-datetime displayFormat="D/M/YYYY" pickerFormat="D/M/YYYY" [(ngModel)]="item.ExpDate">
-                        </ion-datetime> </td>
+                                  <td style="padding-top:15px;">
+                                    <ion-datetime displayFormat="D/M/YYYY" pickerFormat="D/M/YYYY"
+                                      [(ngModel)]="item.ExpDate">
+                                    </ion-datetime>
+                                  </td>
                                   <td style="padding-top:15px;"> </td>
-                                   <td> 
-                                              <span class="label label-sm label-warning circle" 
-                                              >แก้ไข</span>
-                                          </td>
-                                          <td > 
-                                            <span class="label label-sm label-danger circle"
-                                            >ลบ</span>
+                                  <td (click)="remove(i);">
+                                    <span class="label label-sm label-danger circle">ลบ</span>
+                                  </td>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="col-9" *ngIf="page == 2; else serial" #serial>
+                          <div style="padding: 10px;">
+                            <ion-item no-line>
+                              <ion-label class="col-5" style="padding: 0px;" color="primary">Serial No :</ion-label>
+                              <ion-input></ion-input>
+                              <ion-icon name="barcode" (click)="addListserial()"></ion-icon>
+                              <ion-icon name="search" (click)="searchListserial()"></ion-icon>
+                            </ion-item>
+                          </div>
+                          <div class="table-scrollable">
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th> รหัส SKU </th>
+                                  <th> ชื่อรายการ </th>
+                                  <th> Lot/Batch </th>
+                                  <th> รับเข้า </th>
+                                  <th> หน่วย </th>
+                                  <th> สถานะ </th>
+                                  <th> วันหมดอายุ </th>
+                                  <th> หมายเหตุ </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let item of list; let i = index">
+                                  <td style="padding-top:15px;"> {{item.SKUCode}} </td>
+                                  <td style="padding-top:15px;"> {{item.Name}} </td>
+
+
+                                  <td style="padding-top:15px;"></td>
+                                  <td style="padding-top:15px;"> <input type="number" [(ngModel)]="item.Qty"> </td>
+                                  <td>
+                                    <ion-select [(ngModel)]="Unit">
+                                      <ion-select-option [value]="Unit">Pcs</ion-select-option>
+                                    </ion-select>
+                                  </td>
+                                  <td>
+                                    <ion-select interface="popover">
+                                      <ion-select-option>WA</ion-select-option>
+                                    </ion-select>
+                                  </td>
+                                  <td style="padding-top:15px;">
+                                    <ion-datetime displayFormat="D/M/YYYY" pickerFormat="D/M/YYYY"
+                                      [(ngModel)]="item.ExpDate">
+                                    </ion-datetime>
+                                  </td>
+                                  <td style="padding-top:15px;"> </td>
+                                  <td (click)="remove(i);">
+                                    <span class="label label-sm label-danger circle">ลบ</span>
                                   </td>
                               </tbody>
                             </table>
@@ -224,3 +279,4 @@
       </div>
     </div>
   </div>
+</ion-content>

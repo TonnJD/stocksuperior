@@ -4,6 +4,10 @@ import { WebserviceService } from '../../webservice.service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ModalController } from '@ionic/angular';
 import { PopuptranferinfoPage } from '../../popuptranferinfo/popuptranferinfo.page';
+import { Storage } from '@ionic/storage';
+
+const TOKEN_KEY = 'auth-token';
+
 @Component({
   selector: 'app-tranfer-info',
   templateUrl: './tranfer-info.page.html',
@@ -47,21 +51,25 @@ export class TranferInfoPage implements OnInit {
   listproduct;
   data;
   detailtranfer = [];
+  id;
 
   constructor(private route: ActivatedRoute,
     private barcodeScanner: BarcodeScanner,
     public modalController: ModalController,
+    private storage: Storage,
     private webserviceService: WebserviceService) {
-    this.route.queryParams.subscribe(params => {  
-      this.myId = JSON.parse(params["data"]);  
+    this.getUser();
+
+    this.route.queryParams.subscribe(params => {
+      this.myId = JSON.parse(params["data"]);
       this.type = this.myId.type
       this.item = this.myId.item;
       // console.log(this.myId);
-      console.log(this.item);  
+      console.log(this.item);
 
       if (this.type == 'new') {
         this.systemdata();
-        console.log(this.type);        
+        console.log(this.type);
         let params = {
           type: "tranferInfo",
         }
@@ -72,57 +80,64 @@ export class TranferInfoPage implements OnInit {
 
       } else if (this.type == 'edit') {
         this.systemdata();
-        console.log(this.item.CustomerID);        
+        console.log(this.item.CustomerID);
         let params = {
           type: "tranferInfo",
-          id:this.item.TransferID
+          id: this.item.TransferID
         }
         this.webserviceService.tranfer(params).then(list => {
           this.list = list;
           console.log(this.list);
-        });        
+        });
       }
     });
   }
 
+  getUser() {
+    this.storage.get(TOKEN_KEY).then(res => {
+      console.log(res);
+      this.id = res.id;
+    })
+  }
+
   //#region tranfertype
-systemdata(){
-  let tranfertype = {
-    type: "tranfertype",
+  systemdata() {
+    let tranfertype = {
+      type: "tranfertype",
+    }
+    this.webserviceService.tranfer(tranfertype).then(tranfertype => {
+      this.tranfertype = tranfertype;
+      // console.log(this.tranfertype);
+    });
+    let customer = {
+      type: "customer"
+    }
+    this.webserviceService.tranfer(customer).then(customer => {
+      this.customer = customer;
+      // console.log(this.customer);
+    });
+    let TechnicianVender = {
+      type: "TechnicianVender"
+    }
+    this.webserviceService.tranfer(TechnicianVender).then(TechnicianVender => {
+      this.TechnicianVender = TechnicianVender;
+      // console.log(this.TechnicianVender);
+    });
+    let EmpID = {
+      type: "EmpID"
+    }
+    this.webserviceService.tranfer(EmpID).then(EmpID => {
+      this.EmpID = EmpID;
+      console.log(this.EmpID);
+    });
+    let Running = {
+      type: "Running"
+    }
+    this.webserviceService.tranfer(Running).then(Running => {
+      this.Running = Running;
+      console.log(this.Running);
+    });
   }
-  this.webserviceService.tranfer(tranfertype).then(tranfertype => {
-    this.tranfertype = tranfertype;
-    // console.log(this.tranfertype);
-  });
-  let customer = {
-    type: "customer"
-  }
-  this.webserviceService.tranfer(customer).then(customer => {
-    this.customer = customer;
-    // console.log(this.customer);
-  });
-  let TechnicianVender = {
-    type: "TechnicianVender"
-  }
-  this.webserviceService.tranfer(TechnicianVender).then(TechnicianVender => {
-    this.TechnicianVender = TechnicianVender;
-    // console.log(this.TechnicianVender);
-  });
-  let EmpID = {
-    type: "EmpID"
-  }
-  this.webserviceService.tranfer(EmpID).then(EmpID => {
-    this.EmpID = EmpID;
-    console.log(this.EmpID);
-  });
-  let Running = {
-    type: "Running"
-  }
-  this.webserviceService.tranfer(Running).then(Running => {
-    this.Running = Running;
-    console.log(this.Running);
-  });
-}
   //#endregion
   scanserial() {
     this.barcodeScanner.scan().then(barcodeData => {
@@ -193,7 +208,7 @@ systemdata(){
   onChange(value, id) {
     if (id == 'type') {
       this.typetran = value.detail.value
-      console.log('type' +  this.typetran);
+      console.log('type' + this.typetran);
       let Running = {
         type: "Running",
         DocumentTypeID: this.typetran
@@ -205,10 +220,10 @@ systemdata(){
     } else if (id == 'cus') {
       this.cus = value.detail.value
       console.log('cus' + this.cus);
-    }else if (id == 'vender') {
+    } else if (id == 'vender') {
       this.vender = value.detail.value
       console.log('vender' + this.vender);
-    }else if (id == 'tech') {
+    } else if (id == 'tech') {
       this.tech = value.detail.value
       console.log('tech' + this.tech);
     }
@@ -232,12 +247,13 @@ systemdata(){
   }
 
   save() {
-    
-    this.detailtranfer.push({ 
-      cusID: this.item.CustomerID, 
+
+    this.detailtranfer.push({
+      cusID: this.item.CustomerID,
       tranfertype: this.item.DocumentTypeID,
       venderID: this.item.TechnicianVenderID,
-      empid:this.item.EmpID
+      empid: this.item.EmpID,
+      id: this.id
     })
     console.log(this.detailtranfer)
     let params = {
@@ -246,14 +262,14 @@ systemdata(){
       cus: this.detailtranfer
     }
     console.log(params);
-    
+
     this.webserviceService.tranfer(params).then(list => {
       this.producttranfer = list;
       console.log(this.producttranfer);
     });
   }
 
-  async add(){
+  async add() {
     const modal = await this.modalController.create({
       component: PopuptranferinfoPage,
       cssClass: 'my-custom-modal-css',
@@ -264,9 +280,9 @@ systemdata(){
     modal.onDidDismiss().then(data => {
       this.data = data.data
       console.log(this.data);
-      
+
       for (let i = 0; i < this.data.length; i++) {
-        this.list.push({ 
+        this.list.push({
           SerialNo: this.data[i].SerialNo,
           AssetNo: this.data[i].AssetNo,
           SKUCode: this.data[i].SKUCode,
@@ -279,11 +295,11 @@ systemdata(){
           ProductStatusName: this.data[i].ProductStatus,
           ExpDate: this.data[i].ExpDate
         });
-      }     
-      
+      }
+
     })
 
     return await modal.present();
   }
-  
+
 }

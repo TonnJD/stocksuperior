@@ -27,6 +27,10 @@ const routes: Routes = [
         loadChildren: () => import('../page/check-stock/check-stock.module').then(m => m.CheckStockPageModule)
       }, 
       {
+        path: 'asset-location',
+        loadChildren: () => import('../page/asset-location/asset-location.module').then(m => m.AssetLocationPageModule)
+      }, 
+      {
         path: 'check-stock-info',
         loadChildren: () => import('../page/check-stock-info/check-stock-info.module').then( m => m.CheckStockInfoPageModule)
       },

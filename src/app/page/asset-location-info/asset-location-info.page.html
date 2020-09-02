@@ -1,0 +1,253 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      <ion-title></ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-4">
+            <ion-item>
+              <div class="col-2">
+                <ion-label>Serial No.</ion-label>
+              </div>
+              <div class="col-10">
+                <ion-input [(ngModel)]="Serial"></ion-input>
+              </div>
+            </ion-item>
+          </div>
+          <div class="col-8">
+            <ion-item>
+            <ion-icon name="barcode" (click)="Scan()"></ion-icon>
+            </ion-item>
+          </div>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="page-content-inner" *ngIf="AssetID">
+          <div class="row" style="padding:5px;">
+            <div class="col-12 col-md-12" style="padding: 0px;">
+              <div class="portlet box blue">
+                <div class="portlet-title">
+                  <div class="caption">
+                    <i class="fa fa-th-large" style="font-size: 1em;"></i>ข้อมูลสินค้ารายชิ้น</div>
+                </div>
+                <div class="portlet-body" style="padding: 2px;">
+                  <div class="row">
+                    <div class="col-6">
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label>TID</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-input [(ngModel)]="TID"></ion-input>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label>SerialNo</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-input [(ngModel)]="SerialNo"></ion-input>
+                        </div>
+                      </ion-item>
+                    </div>
+                    <div class="col-6">
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label>AssetNo</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-input [(ngModel)]="AssetNo"></ion-input>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label>Description</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-input [(ngModel)]="Description"></ion-input>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-12" style="text-align: right;">
+                          <ion-button color="success" slot="end" (click)="Save()">บันทึก</ion-button>
+                        </div>
+                      </ion-item>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-content-inner">
+          <div class="row" style="padding:5px;">
+            <div class="col-12 col-md-12" style="padding: 0px;">
+              <div class="portlet box blue">
+                <div class="portlet-title">
+                  <div class="caption">
+                    <i class="fa fa-th-large" style="font-size: 1em;"></i>ทะเบียนสินค้า</div>
+                </div>
+                <div class="portlet-body" style="padding: 2px;">
+    
+                  <div class="row">
+                    <div class="col-12" style="text-align: center; margin-top: 20px;" *ngIf="AssetLocationInfo == null">
+                      <label>ไม่พบข้อมูล</label>
+                    </div>
+                    <div class="col-lg-12" *ngIf="AssetLocationInfo">
+                      <div class="portlet light">
+                        <div class="portlet-body">
+                          <div class="table-scrollable">
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th> TID </th>
+                                  <th> Serial No </th>
+                                  <th> Asset No </th>
+                                  <th> คำอธิบาย/รายละเอียด </th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let item of AssetLocationInfo; let i = index">
+                                  <td> {{item.TID}} </td>
+                                  <td> {{item.SerialNo}} </td>
+                                  <td> {{item.AssetNo}} </td>
+                                  <td> {{item.Description}} </td>
+                                  <td>
+                                    <ion-button color="warning" (click)="Edit(item)"> แก้ไข </ion-button>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="page-content-inner">
+          <div class="row" style="padding:5px;">
+            <div class="col-12 col-md-12" style="padding: 0px;">
+              <div class="portlet box blue">
+                <div class="portlet-title">
+                  <div class="caption">
+                    <i class="fa fa-th-large" style="font-size: 1em;"></i>ข้อมูลสินค้า</div>
+                </div>
+                <div class="portlet-body" style="padding: 2px;">                 
+                  <div class="row">
+                    <div class="col-12">
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label>รหัสสินค้า</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>{{SKUCode}}</ion-label>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label>ชื่อสินค้า</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>{{ProductName}}</ion-label>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label>ประเภทสินค้า</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>{{ProductTypeName}}</ion-label>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label>ยี่ห้อ</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>{{BrandName}}</ion-label>
+                        </div>
+                      </ion-item>
+                      <!-- <ion-item>
+                        <div class="col-4">
+                          <ion-label>Lot / Batch</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>{{LotNo}}</ion-label>
+                        </div>
+                      </ion-item> -->
+                    </div>
+                    <div class="col-12">
+                      <!-- <ion-item>
+                        <div class="col-4">
+                          <ion-label>วันผลิต</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>{{MfgDate}}</ion-label>
+                        </div>
+                      </ion-item> -->
+                      <!-- <ion-item>
+                        <div class="col-4">
+                          <ion-label>วันหมดอายุ</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>{{ExpDate}}</ion-label>
+                        </div>
+                      </ion-item> -->
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label>รุ่น</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>{{ProductName}}</ion-label>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label>สถานะ</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>{{ProductStatus}}</ion-label>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label>จำนวน</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>{{CountAmount}}</ion-label>
+                        </div>
+                      </ion-item>
+                      <ion-item>
+                        <div class="col-4">
+                          <ion-label>จำนวน Serial</ion-label>
+                        </div>
+                        <div class="col-8">
+                          <ion-label>{{CountSerial}}</ion-label>
+                        </div>
+                      </ion-item>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

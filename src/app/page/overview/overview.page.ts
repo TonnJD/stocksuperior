@@ -49,11 +49,9 @@ export class OverviewPage implements OnInit {
 
   getUser(){
     this.storage.get(TOKEN_KEY).then(res => {
-      this.memid = res.id
-      this.name = res.name
-      this.username = res.username
-      this.empID = res.emmID    
-      console.log(this.memid);      
+      if (res) {       
+        console.log(res);
+      }
     })
   }
 

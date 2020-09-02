@@ -59,8 +59,11 @@ export class LoginPage implements OnInit {
     this.user.email = this.user.email;
     this.user.password = this.user.password;
     this.user.type = "Stock";
+    console.log(this.user);
+    
     this.webservice.login(this.user).then(data => {
       this.data = data;
+      console.log(this.data);      
       console.log('Data Returner', this.data);
       for (let i = 0; i < this.data.length; i++) {
         this.memid = this.data[i].memid;
@@ -70,7 +73,7 @@ export class LoginPage implements OnInit {
         this.position = this.data[i].Position;
         this.empID = this.data[i].empID;
         this.role = this.data[i].roleID;
-      }
+      }      
       if (this.status == false) {
         this.false();
       }
@@ -97,7 +100,7 @@ export class LoginPage implements OnInit {
     this.newUser.position = this.position;
     this.newUser.empID = this.empID;
     this.newUser.role = this.role;
-    this.newUser.status = this.status;
+    this.newUser.status = this.status;   
     this.auth.login(this.newUser);
   }
 

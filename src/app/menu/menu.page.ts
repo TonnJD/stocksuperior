@@ -12,7 +12,12 @@ export class MenuPage implements OnInit {
       title: 'ภาพรวม',
       url: '/menu/overview',
       icon: 'home'
-    },    
+    },
+    {
+      title: 'ทะเบียนสินค้ารายชิ้น',
+      url: '/menu/asset-location',
+      icon: 'cube'
+    },
     {
       title: 'เช็คสต็อก',
       url: '/menu/check-stock',

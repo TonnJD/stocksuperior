@@ -1,0 +1,185 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-title>ทะเบียนสินค้ารายชิ้น</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container-fluid">
+    <div class="page-content-inner">
+      <div class="row" style="padding:5px;">
+        <div class="col-12 col-md-12" style="padding: 0px;">
+          <div class="portlet box blue">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-th-large" style="font-size: 1em;"></i>ค้นหาข้อมูล</div>
+            </div>
+            <div class="portlet-body" style="padding: 2px;">
+              <div class="row">
+                <div class="col-6">
+                  <ion-item>
+                    <div class="col-4">
+                      <ion-label>สินค้า / SKU</ion-label>
+                    </div>
+                    <div class="col-8">
+                      <ion-input [(ngModel)]="SKUName"></ion-input>
+                    </div>
+                  </ion-item>
+                  <ion-item>
+                    <div class="col-4">
+                      <ion-label color="primary">ประเภทสินค้า</ion-label>
+                    </div>
+                    <div class="col-8">
+                      <ion-select interface="popover" [(ngModel)]="SKUID">
+                        <ion-select-option *ngFor="let title of SKU" [value]="title.SkuID" [selected]="title.SkuName">
+                          {{title.SkuName}}</ion-select-option>
+                      </ion-select>
+                    </div>
+                  </ion-item>
+                  <ion-item>
+                    <div class="col-4">
+                      <ion-label color="primary">สถานะสินค้า</ion-label>
+                    </div>
+                    <div class="col-8">
+                      <ion-select interface="popover" [(ngModel)]="ProductStatusID">
+                        <ion-select-option *ngFor="let title of ProductStatus" [value]="title.ProductStatusID"
+                          [selected]="title.ProductStatusName">
+                          {{title.ProductStatusName}}</ion-select-option>
+                      </ion-select>
+                    </div>
+                  </ion-item>
+                  <ion-item>
+                    <div class="col-4">
+                      <ion-label>Lot / Batch</ion-label>
+                    </div>
+                    <div class="col-8">
+                      <ion-input [(ngModel)]="Lot"></ion-input>
+                    </div>
+                  </ion-item>
+                  <ion-item>
+                    <div class="col-4">
+                      <ion-label color="primary">ตำแหน่ง</ion-label>
+                    </div>
+                    <div class="col-8">
+                      <ion-select interface="popover" [(ngModel)]="LocationID">
+                        <ion-select-option *ngFor="let title of Location" [value]="title.LocationID"
+                          [selected]="title.LocationName">
+                          {{title.LocationName}}</ion-select-option>
+                      </ion-select>
+                    </div>
+                  </ion-item>
+                </div>
+                <div class="col-6">
+                  <ion-item>
+                    <div class="col-4">
+                      <ion-label>SKUCode</ion-label>
+                    </div>
+                    <div class="col-8">
+                      <ion-input [(ngModel)]="SkuCode"></ion-input>
+                    </div>
+                  </ion-item>
+                  <ion-item>
+                    <div class="col-4">
+                      <ion-label>เลขที่ใบรับสินค้า</ion-label>
+                    </div>
+                    <div class="col-8">
+                      <ion-input [(ngModel)]="DocNo"></ion-input>
+                    </div>
+                  </ion-item>
+                  <ion-item>
+                    <div class="col-4">
+                      <ion-label>เลขที่ใบสั่งซื้อ (PR)</ion-label>
+                    </div>
+                    <div class="col-8">
+                      <ion-input [(ngModel)]="PRNo"></ion-input>
+                    </div>
+                  </ion-item>
+                  <ion-item>
+                    <div class="col-4">
+                      <ion-label>เอกสารอ้างอิง</ion-label>
+                    </div>
+                    <div class="col-8">
+                      <ion-input [(ngModel)]="Ref"></ion-input>
+                    </div>
+                  </ion-item>
+                  <ion-item>
+                  <ion-button color="primary" slot="end" (click)="Search()">ค้นหา</ion-button>
+                </ion-item>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-content-inner">
+      <div class="row" style="padding:5px;">
+        <div class="col-12 col-md-12" style="padding: 0px;">
+          <div class="portlet box blue">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-th-large" style="font-size: 1em;"></i>ทะเบียนสินค้า</div>
+            </div>
+            <div class="portlet-body" style="padding: 2px;">
+              <div class="row">
+                <div class="col-12" style="text-align: center; margin-top: 20px;" #lblWait
+                  *ngIf="AssetLocationList == null; else lblWait">
+                  <label>ไม่พบข้อมูล</label>
+                </div>
+                <div class="col-lg-12" *ngIf="AssetLocationList != null; else lbltable">
+                  <div class="portlet light " #lbltable>
+                    <div class="portlet-body">
+                      <div class="table-scrollable">
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                              <th> ประเภทสินค้า </th>
+                              <th> รหัส SKU </th>
+                              <th> รายละเอียดสินค้า </th>
+                              <th> จำนวนขั้นต่ำ </th>
+                              <th> Lot / Batch </th>
+                              <th> ตำแหน่ง </th>
+                              <th> สถานะสินค้า </th>
+                              <th> จำนวน </th>
+                              <th> จำนวน S/N </th>
+                              <th> เลขที่ใบรับสินค้า </th>
+                              <th> วันที่รับสินค้า </th>
+                              <th> วันหมดประกัน </th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of AssetLocationList; let i = index">
+                              <td> {{item.ProductTypeName}} </td>
+                              <td> {{item.SKUCode}} </td>
+                              <td> {{item.SKUName}} </td>
+                              <td> {{item.NumberMin}} </td>
+                              <td> {{item.LotNo}} </td>
+                              <td> {{item.LocationName}} </td>
+                              <td> {{item.ProductStatus}} </td>
+                              <td> {{item.Qty}} </td>
+                              <td> {{item.Serial}} </td>
+                              <td> {{item.OrderNo}} </td>
+                              <td> {{item.OrderDate}} </td>
+                              <td> {{item.ExpDate}} </td>
+                              <td>
+                                <ion-button color="warning" (click)="Edit(item)"> แก้ไข </ion-button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

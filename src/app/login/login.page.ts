@@ -66,12 +66,11 @@ export class LoginPage implements OnInit {
       console.log(this.data);      
       console.log('Data Returner', this.data);
       for (let i = 0; i < this.data.length; i++) {
-        this.memid = this.data[i].memid;
+        this.memid = this.data[i].id;
         this.status = this.data[i].Status;
         this.name = this.data[i].Name;
         this.username = this.data[i].Username;
         this.position = this.data[i].Position;
-        this.empID = this.data[i].empID;
         this.role = this.data[i].roleID;
       }      
       if (this.status == false) {

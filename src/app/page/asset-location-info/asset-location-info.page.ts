@@ -114,17 +114,17 @@ export class AssetLocationInfoPage implements OnInit {
   }
 
   Scan() {
-    // this.barcodeScanner.scan().then(barcodeData => {
-    //   console.log('Barcode data', barcodeData);
-    //   let barcode = barcodeData;
-    //   this.Serial = barcode.text;
-    //   if (this.Serial != null) {
-    //     this.SaveAssetLocationInfo();
-    //   }
-    // })
-    if (this.Serial != null) {
-      this.SaveAssetLocationInfo();
-    }
+    this.barcodeScanner.scan().then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+      let barcode = barcodeData;
+      this.Serial = barcode.text;
+      if (this.Serial != null) {
+        this.SaveAssetLocationInfo();
+      }
+    })
+    // if (this.Serial != null) {
+    //   this.SaveAssetLocationInfo();
+    // }
   }
 
   SaveAssetLocationInfo() {
@@ -192,6 +192,10 @@ export class AssetLocationInfoPage implements OnInit {
       buttons: ['OK']
     });
     await alert.present();
+  }
+
+  close(){
+    this.AssetID = "";
   }
 
 }

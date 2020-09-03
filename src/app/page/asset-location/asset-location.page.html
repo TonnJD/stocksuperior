@@ -30,7 +30,7 @@
                   </ion-item>
                   <ion-item>
                     <div class="col-4">
-                      <ion-label color="primary">ประเภทสินค้า</ion-label>
+                      <ion-label>ประเภทสินค้า</ion-label>
                     </div>
                     <div class="col-8">
                       <ion-select interface="popover" [(ngModel)]="SKUID">
@@ -41,7 +41,7 @@
                   </ion-item>
                   <ion-item>
                     <div class="col-4">
-                      <ion-label color="primary">สถานะสินค้า</ion-label>
+                      <ion-label>สถานะสินค้า</ion-label>
                     </div>
                     <div class="col-8">
                       <ion-select interface="popover" [(ngModel)]="ProductStatusID">
@@ -61,7 +61,7 @@
                   </ion-item>
                   <ion-item>
                     <div class="col-4">
-                      <ion-label color="primary">ตำแหน่ง</ion-label>
+                      <ion-label>ตำแหน่ง</ion-label>
                     </div>
                     <div class="col-8">
                       <ion-select interface="popover" [(ngModel)]="LocationID">
@@ -171,6 +171,12 @@
                             </tr>
                           </tbody>
                         </table>
+                        <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
+                          <ion-infinite-scroll-content
+                            loadingSpinner="bubbles"
+                            loadingText="Loading more data…">
+                          </ion-infinite-scroll-content>
+                        </ion-infinite-scroll>
                       </div>
                     </div>
                   </div>

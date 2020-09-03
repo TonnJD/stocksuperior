@@ -6,9 +6,9 @@ import { HttpClient, HttpRequest, HttpEvent, HttpHeaders } from '@angular/common
 })
 export class WebserviceService {
   
-  apiServer_url = 'http://localhost:6369/';
+  // apiServer_url = 'http://localhost:6369/';
 
-  // apiServer_url = 'http://wmstest.wingplusweb.com';
+  apiServer_url = 'https://wmstest.erpsuperior.com';
 
   constructor(private http: HttpClient) { }
 

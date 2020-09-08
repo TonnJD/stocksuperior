@@ -85,7 +85,7 @@ export class AssetLocationPage implements OnInit {
     this.service.AssetLocationController(AssetLocationList).then(AssetLocationList => {
       this.asset = AssetLocationList
       console.log(this.asset);
-
+      this.AssetLocationList = [];
       for (let i = 0; i < 5; i++) {
         this.AssetLocationList.push(this.asset[i]);
       }
@@ -113,12 +113,4 @@ export class AssetLocationPage implements OnInit {
       }
     }, 500);
   }
-
-  addMore() {
-    this.Search()
-    for (let i = 0; i < 20; i++) {
-      this.AssetLocationList.push(this.asset[i]);
-    }
-  }
-
 }

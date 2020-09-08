@@ -6,7 +6,6 @@ import { OverviewinfoPage } from '../overviewinfo/overviewinfo.page';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../auth/authentication.service';
 import { Storage } from '@ionic/storage';
-
 const TOKEN_KEY = 'auth-token';
 
 @Component({
@@ -27,6 +26,9 @@ export class OverviewPage implements OnInit {
   type;
   user;
   memid;
+  Product;
+  ProductList;
+
   constructor(private storageService: StorageService,
     public webservice: WebserviceService,
     private storage: Storage,
@@ -37,14 +39,12 @@ export class OverviewPage implements OnInit {
       setTimeout(() => {
         this.ngOnInit();
       }, 500);
-
-     
-
     }
 
  ngOnInit() {
    this.getUser();
     this.loadStock();
+    this.onChange("69");
   }
 
   getUser(){
@@ -56,19 +56,24 @@ export class OverviewPage implements OnInit {
   }
 
   loadStock(){
-    // this.DataService.getnew().subscribe(data => {
-    //   console.log(data);
-    //   this.data = data;
-    //   for (let i = 0; i < this.data.length; i++) {
-    //     this.header = this.data[i].header;
-    //     this.type = this.data[i].type;        
-    //   }
-    // });
+    let Product = {
+      Type: "GetProduct",
+    }
+    this.webservice.Overview(Product).then(Product => {
+      this.Product = Product
+      console.log(this.Product);
+    });
   }
 
   onChange(item) {
-    this.device = "device"
-    this.type = "type"
+    let Product = {
+      Type: "GetProductList",
+      ProductTypeID: item
+    }
+    this.webservice.Overview(Product).then(ProductList => {
+      this.ProductList = ProductList
+      console.log(this.ProductList);
+    });
   }
 
   View() {

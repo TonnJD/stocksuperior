@@ -18,21 +18,21 @@ export class MenuPage implements OnInit {
       url: '/menu/asset-location',
       icon: 'cube'
     },
-    {
-      title: 'เช็คสต็อก',
-      url: '/menu/check-stock',
-      icon: 'cube'
-    },
-    {
-      title: 'รับสินค้าข้าระบบ',
-      url: '/menu/incoming-goods',
-      icon: 'albums'
-    },
-    {
-      title: 'โอนสินค้า',
-      url: '/menu/tranfer',
-      icon: 'repeat'
-    },
+    // {
+    //   title: 'เช็คสต็อก',
+    //   url: '/menu/check-stock',
+    //   icon: 'cube'
+    // },
+    // {
+    //   title: 'รับสินค้าข้าระบบ',
+    //   url: '/menu/incoming-goods',
+    //   icon: 'albums'
+    // },
+    // {
+    //   title: 'โอนสินค้า',
+    //   url: '/menu/tranfer',
+    //   icon: 'repeat'
+    // },
     {
       title: 'ตั้งค่า',
       url: '/menu/setting',

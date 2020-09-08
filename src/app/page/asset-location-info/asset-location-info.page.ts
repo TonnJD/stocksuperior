@@ -32,7 +32,6 @@ export class AssetLocationInfoPage implements OnInit {
   ProductTypeName;
   CountList;
   AssetID;
-  TID;
   AssetNo;
   Description;
   Serial;
@@ -70,7 +69,6 @@ export class AssetLocationInfoPage implements OnInit {
     this.AssetID = "";
     this.SerialNo = "";
     this.AssetNo = "";
-    this.TID = "";
   }
 
   GetAmount() {
@@ -136,7 +134,6 @@ export class AssetLocationInfoPage implements OnInit {
         AssetID: this.AssetID,
         SerialNo: this.SerialNo,
         AssetNo: this.AssetNo,
-        TID: this.TID,
         RefNo1: "",
         RefNo2: "",
         Description: this.Description,
@@ -168,10 +165,10 @@ export class AssetLocationInfoPage implements OnInit {
   Edit(item) {
     console.log(item);
     this.AssetID = item.AssetID
-    this.TID = item.TID;
     this.SerialNo = item.SerialNo;
     this.AssetNo = item.AssetNo;
     this.Description = item.Description;
+    this.Save();
   }
 
   Save() {
@@ -180,7 +177,7 @@ export class AssetLocationInfoPage implements OnInit {
 
   async alertMeanSerial() {
     const alert = await this.alertController.create({
-      message: 'Serial ซ้ำ',
+      message: 'Serial No หรือ Asset No นี้มีในระบบแล้ว',
       buttons: ['OK']
     });
     await alert.present();

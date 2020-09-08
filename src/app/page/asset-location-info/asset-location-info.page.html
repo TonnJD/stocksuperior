@@ -20,13 +20,14 @@
               <div class="col-7">
                 <ion-input [(ngModel)]="Serial"></ion-input>
               </div>
+              <ion-icon name="save" (click)="SaveAssetLocationInfo()"></ion-icon>
               <ion-icon name="barcode" (click)="Scan()"></ion-icon>
             </ion-item>
           </div>
         </div>
       </div>
       <div class="col-8">
-        <div class="page-content-inner" *ngIf="AssetID">
+        <div class="page-content-inner" style="display: none;">
           <div class="row" style="padding:5px;">
             <div class="col-12 col-md-12" style="padding: 0px;">
               <div class="portlet box blue">
@@ -105,7 +106,6 @@
                             <table class="table table-hover">
                               <thead>
                                 <tr>
-                                  <th> TID </th>
                                   <th> Serial No </th>
                                   <th> Asset No </th>
                                   <th> คำอธิบาย/รายละเอียด </th>
@@ -114,12 +114,11 @@
                               </thead>
                               <tbody>
                                 <tr *ngFor="let item of AssetLocationInfo; let i = index">
-                                  <td> {{item.TID}} </td>
-                                  <td> {{item.SerialNo}} </td>
-                                  <td> {{item.AssetNo}} </td>
-                                  <td> {{item.Description}} </td>
+                                  <td> <input type="text" [(ngModel)]="item.SerialNo" style="width: 120px" /></td>
+                                  <td> <input type="text" [(ngModel)]="item.AssetNo" style="width: 120px" /></td>
+                                  <td> <input type="text" [(ngModel)]="item.Description" style="width: 120px" /></td>
                                   <td>
-                                    <ion-button color="warning" (click)="Edit(item)"> แก้ไข </ion-button>
+                                    <ion-button color="warning" (click)="Edit(item)" style="height: 25px!important;"> บันทึก </ion-button>
                                   </td>
                                 </tr>
                               </tbody>

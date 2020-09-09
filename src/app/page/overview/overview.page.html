@@ -20,42 +20,48 @@
             <div class="portlet-body" style="padding: 2px;">
               <div class="row">
                 <div class="col-4">
-                <ion-list style="background-color: white;">
-                  <ion-item class="item" *ngFor="let item of Product" (click)="onChange(item.ProductTypeID)">
-                    <ion-label>{{item.ProductTypeName}} ({{item.Count}})</ion-label>
-                  </ion-item>
-                </ion-list>
-              </div>
-              <div class="col-8">
-                <div class="tab-content">
+                  <ion-list style="background-color: white;">
+                    <ion-item class="item" *ngFor="let item of Product" (click)="onChange(item.ProductTypeID)">
+                      <ion-label>{{item.ProductTypeName}} ({{item.Count}})</ion-label>
+                    </ion-item>
+                  </ion-list>
+                </div>
+                <div class="col-8">
+                  <div class="tab-content">
                     <div class="tab-pane active">
                       <div class="row">
                         <div class="col-12">
-                          <div class="table-scrollable">    
+                          <div class="table-scrollable">
                             <div class="col-12" style="text-align: center; margin-top: 20px;" #lblWait
-                  *ngIf="AssetLocationList == []">
-                  <label>ไม่พบข้อมูล</label>
-                </div>                       
-                            <table class="table table-hover" *ngIf="ProductList != []">
+                              *ngIf="list == false">
+                              <label>ไม่พบข้อมูล</label>
+                            </div>
+                            <table class="table table-hover" *ngIf="list != false">
                               <thead>
                                 <tr>
                                   <th> ชื่อสินค้า </th>
-                                  <th> จำนวน </th>                                  
+                                  <th> จำนวน </th>
                                 </tr>
-                              </thead>                              
-                              <tbody>                                
+                              </thead>
+                              <tbody>
                                 <tr *ngFor="let item of ProductList; let i = index">
-                                                  <td> {{item.SKUName}} </td>
-                                                  <td> {{item.Count}} </td>                            
+                                  <td> {{item.SKUName}} </td>
+                                  <td> {{item.Count}} </td>
                               </tbody>
                             </table>
+                            <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" *ngIf="list != false">
+                              <ion-infinite-scroll-content
+                                loadingSpinner="bubbles"
+                                loadingText="Loading more data…">
+                              </ion-infinite-scroll-content>
+                            </ion-infinite-scroll>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  </div>
                 </div>
+              </div>
             </div>
           </div>
         </div>

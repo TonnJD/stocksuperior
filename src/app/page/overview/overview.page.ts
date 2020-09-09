@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../../storage.service';
 import { WebserviceService } from '../../webservice.service';
-import { ModalController,NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { OverviewinfoPage } from '../overviewinfo/overviewinfo.page';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../auth/authentication.service';
@@ -28,6 +28,8 @@ export class OverviewPage implements OnInit {
   memid;
   Product;
   ProductList;
+  limit;
+  list;
 
   constructor(private storageService: StorageService,
     public webservice: WebserviceService,
@@ -35,27 +37,30 @@ export class OverviewPage implements OnInit {
     public navCtrl: NavController,
     private router: Router,
     private auth: AuthenticationService,
-    public modalController: ModalController) { 
-      setTimeout(() => {
-        this.ngOnInit();
-      }, 500);
-    }
+    public modalController: ModalController) {
 
- ngOnInit() {
-   this.getUser();
+      this.ProductList = [];
+      
+    setTimeout(() => {
+      this.ngOnInit();
+    }, 500);
+  }
+
+  ngOnInit() {
+    this.getUser();
     this.loadStock();
     this.onChange("69");
   }
 
-  getUser(){
+  getUser() {
     this.storage.get(TOKEN_KEY).then(res => {
-      if (res) {       
+      if (res) {
         console.log(res);
       }
     })
   }
 
-  loadStock(){
+  loadStock() {
     let Product = {
       Type: "GetProduct",
     }
@@ -71,8 +76,13 @@ export class OverviewPage implements OnInit {
       ProductTypeID: item
     }
     this.webservice.Overview(Product).then(ProductList => {
-      this.ProductList = ProductList
-      console.log(this.ProductList);
+      this.list = ProductList
+      if (this.list != false) {
+        for (let i = 0; i < 35; i++) {
+          this.ProductList.push(this.list[i]);
+        }
+        console.log(this.ProductList);
+      }
     });
   }
 
@@ -80,4 +90,15 @@ export class OverviewPage implements OnInit {
     this.router.navigate(['/overviewinfo']);
   }
 
+  doInfinite(infiniteScroll) {
+    if (this.ProductList.length != 0) {
+      this.limit = this.ProductList.length;
+      setTimeout(() => {
+        infiniteScroll.target.complete();
+        for (let i = this.limit; i < this.limit + 10; i++) {
+          this.ProductList.push(this.list[i]);
+        }
+      }, 500);
+    }
+  }
 }

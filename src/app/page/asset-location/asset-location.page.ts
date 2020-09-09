@@ -86,7 +86,7 @@ export class AssetLocationPage implements OnInit {
       this.asset = AssetLocationList
       console.log(this.asset);
       this.AssetLocationList = [];
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 20; i++) {
         this.AssetLocationList.push(this.asset[i]);
       }
     });
@@ -108,7 +108,7 @@ export class AssetLocationPage implements OnInit {
     this.limit = this.AssetLocationList.length;
     setTimeout(() => {
       infiniteScroll.target.complete();
-      for (let i = this.limit; i < this.limit + 5; i++) {
+      for (let i = this.limit; i < this.limit + 20; i++) {
         this.AssetLocationList.push(this.asset[i]);
       }
     }, 500);

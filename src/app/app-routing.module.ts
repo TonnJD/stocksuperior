@@ -38,7 +38,8 @@ const routes: Routes = [
   {
     path: 'popuptranferinfo',
     loadChildren: () => import('./popuptranferinfo/popuptranferinfo.module').then( m => m.PopuptranferinfoPageModule)
-  },  {
+  },
+  {
     path: 'asset-location',
     loadChildren: () => import('./page/asset-location/asset-location.module').then( m => m.AssetLocationPageModule)
   },
@@ -46,6 +47,11 @@ const routes: Routes = [
     path: 'asset-location-info',
     loadChildren: () => import('./page/asset-location-info/asset-location-info.module').then( m => m.AssetLocationInfoPageModule)
   },
+  {
+    path: 'changpassword',
+    loadChildren: () => import('./setting/changpassword/changpassword.module').then( m => m.ChangpasswordPageModule)
+  },
+
 
   // {
   //   path: 'overview',

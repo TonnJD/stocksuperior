@@ -15,6 +15,11 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { WebserviceService } from '../app/webservice.service';
 import  { IncomingGoodsInfoListPageModule } from '../app/page/incoming-goods-info-list/incoming-goods-info-list.module';
 import {PopuptranferinfoPageModule } from '../app/popuptranferinfo/popuptranferinfo.module';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { BrowserTab } from '@ionic-native/browser-tab/ngx';
+import { ChangpasswordPageModule } from '../app/setting/changpassword/changpassword.module';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,14 +31,17 @@ import {PopuptranferinfoPageModule } from '../app/popuptranferinfo/popuptranferi
       IonicModule.forRoot(),
       IncomingGoodsInfoListPageModule,
       PopuptranferinfoPageModule,
-      AppRoutingModule],
-
+      AppRoutingModule,
+      ChangpasswordPageModule],
 
   providers: [
     WebserviceService,
     BarcodeScanner,
     StatusBar,
     SplashScreen,
+    ScreenOrientation,
+    AppVersion,
+    BrowserTab,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

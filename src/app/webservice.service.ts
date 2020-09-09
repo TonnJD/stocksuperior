@@ -6,9 +6,9 @@ import { HttpClient, HttpRequest, HttpEvent, HttpHeaders } from '@angular/common
 })
 export class WebserviceService {
   
-  apiServer_url = 'http://localhost:6369/';
+  // apiServer_url = 'http://localhost:6369/';
 
-  // apiServer_url = 'https://wmstest.erpsuperior.com';
+  apiServer_url = 'https://wmstest.erpsuperior.com';
 
   constructor(private http: HttpClient) { }
 
@@ -68,6 +68,18 @@ export class WebserviceService {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
       this.http.post(this.apiServer_url + '/API/Overview.asmx/overview', JSON.stringify(form), option).subscribe(data => {
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
+    });
+  }
+
+  Setting(form){
+    return new Promise((resovle, reject) => {
+      let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      this.http.post(this.apiServer_url + '/API/CheckVersion.asmx/checkversion', JSON.stringify(form), option).subscribe(data => {
         resovle(data);
       }, error => {
         reject(error)

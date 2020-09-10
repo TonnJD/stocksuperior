@@ -6,6 +6,10 @@ import { OverviewinfoPage } from '../overviewinfo/overviewinfo.page';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../auth/authentication.service';
 import { Storage } from '@ionic/storage';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { BrowserTab } from '@ionic-native/browser-tab/ngx';
+import { AlertController } from '@ionic/angular';
+
 const TOKEN_KEY = 'auth-token';
 
 @Component({
@@ -30,6 +34,9 @@ export class OverviewPage implements OnInit {
   ProductList;
   limit;
   list;
+  VersionNumber;
+  statusversion;
+  link;
 
   constructor(private storageService: StorageService,
     public webservice: WebserviceService,
@@ -37,7 +44,10 @@ export class OverviewPage implements OnInit {
     public navCtrl: NavController,
     private router: Router,
     private auth: AuthenticationService,
-    public modalController: ModalController) {
+    public modalController: ModalController,
+    private appVersion: AppVersion,
+    public alertController: AlertController,
+    private browserTab: BrowserTab,) {
 
       this.ProductList = [];
       
@@ -47,6 +57,7 @@ export class OverviewPage implements OnInit {
   }
 
   ngOnInit() {
+    this.checkversion();
     this.getUser();
     this.loadStock();
     this.onChange("69");
@@ -101,4 +112,74 @@ export class OverviewPage implements OnInit {
       }, 500);
     }
   }
+
+  //#region Check Version
+  checkversion() {
+    this.appVersion.getVersionNumber().then((s) => {
+      this.VersionNumber = s;
+      console.log(this.VersionNumber);
+      let param = {
+        version: this.VersionNumber,
+        Type: "checkversion",
+      }
+      console.log(param);
+      this.webservice.Setting(param).then(data => {
+        this.statusversion = data;
+        console.log(this.statusversion);
+  
+        if (this.statusversion == true) {
+  
+        } else {
+          this.link = this.statusversion;
+          console.log(this.link);
+          
+          this.alertversion();
+        }
+      });
+    })
+  }
+  //#endregion
+
+  //#region 
+  async alertversion() {
+    const alert = await this.alertController.create({
+      message: 'กรุณาดาวน์โหลดเวอร์ชั่นใหม่',
+      buttons: [
+        {
+          text: 'ดาวน์โหลดเวอร์ชั่นใหม่',
+          handler: () => {
+            this.openUrl();
+          }
+        }, {
+          text: 'ยกเลิก',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  //#endregion
+
+  //#region 
+  openUrl() {
+    console.log(this.link);
+    this.browserTab.isAvailable()
+      .then((isAvailable: boolean) => {
+
+        if (isAvailable) {
+
+          this.browserTab.openUrl(this.link);
+          //this.browserTab.openUrl('https://test.erpsuperior.com/APK/eServiceTest.apk');
+          //this.browserTab.openUrl('https://drive.google.com/file/d/1CYrs3j1akx2gtIXRx3A_DvD8kX9bSsea/view?usp=sharing');
+
+        } else {
+
+          // if custom tabs are not available you may  use InAppBrowser
+
+        }
+      });
+  }
+  //#endregion
+
 }

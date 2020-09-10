@@ -62,13 +62,13 @@ logout() {
 //#endregion
 
  //#region Check Version
- checkversion() {
+ checkversion() {  
   this.appVersion.getVersionNumber().then((s) => {
     this.VersionNumber = s;
     console.log(this.VersionNumber);
     let param = {
       version: this.VersionNumber,
-      typedevice: "checkversion",
+      Type: "checkversion",
     }
     console.log(param);
     this.service.Setting(param).then(data => {

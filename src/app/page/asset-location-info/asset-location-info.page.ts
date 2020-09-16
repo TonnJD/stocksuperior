@@ -117,6 +117,7 @@ export class AssetLocationInfoPage implements OnInit {
       let barcode = barcodeData;
       this.Serial = barcode.text;
       if (this.Serial != null) {
+        this.SerialNo = this.Serial;
         this.SaveAssetLocationInfo();
       }
     })
@@ -125,6 +126,14 @@ export class AssetLocationInfoPage implements OnInit {
     // }
   }
 
+  Save(){    
+    if (this.Serial == "") {
+      this.alertNot();
+    }else{
+      this.SerialNo = this.Serial;
+      this.SaveAssetLocationInfo();
+    }
+  }
   SaveAssetLocationInfo() {
     if (this.CountSerial == this.CountAmount && this.AssetID == "") {
       this.alertNotSerial();
@@ -154,6 +163,7 @@ export class AssetLocationInfoPage implements OnInit {
           this.SelectGridAssetLocationInfo();
           this.GetAmount();
           this.AssetID = "";
+          this.Serial = "";
         } else {
           this.alertMeanSerial();
         }
@@ -168,16 +178,20 @@ export class AssetLocationInfoPage implements OnInit {
     this.SerialNo = item.SerialNo;
     this.AssetNo = item.AssetNo;
     this.Description = item.Description;
-    this.Save();
-  }
-
-  Save() {
     this.SaveAssetLocationInfo();
   }
 
   async alertMeanSerial() {
     const alert = await this.alertController.create({
       message: 'Serial No หรือ Asset No นี้มีในระบบแล้ว',
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  async alertNot() {
+    const alert = await this.alertController.create({
+      message: 'กรุณากรอก Serial',
       buttons: ['OK']
     });
     await alert.present();
@@ -193,6 +207,27 @@ export class AssetLocationInfoPage implements OnInit {
 
   close(){
     this.AssetID = "";
+  }
+
+  Delete(AssetID)
+  {
+    let DeleteInfo = {
+      Type: "DeleteAssetInfo",
+      AssetID: AssetID
+    }
+    console.log(DeleteInfo);
+
+    this.service.AssetLocationController(DeleteInfo).then(Status => {
+      console.log(Status);
+      if (Status == true) {
+        this.SelectGridAssetLocationInfo();
+        this.GetAmount();
+        this.AssetID = "";
+        this.Serial = "";
+      } else {
+
+      }
+    });
   }
 
 }

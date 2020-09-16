@@ -8,8 +8,9 @@ export class WebserviceService {
   
   // apiServer_url = 'http://localhost:6369/';
 
-  apiServer_url = 'https://wmstest.erpsuperior.com';
-
+  // apiServer_url = 'https://wmstest.erpsuperior.com';
+  apiServer_url = 'https://wms.erpsuperior.com';
+  
   constructor(private http: HttpClient) { }
 
    //#region Server

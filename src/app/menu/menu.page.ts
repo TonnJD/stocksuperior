@@ -24,7 +24,7 @@ export class MenuPage implements OnInit {
     //   icon: 'cube'
     // },
     // {
-    //   title: 'รับสินค้าข้าระบบ',
+    //   title: 'รับสินค้าเข้าระบบ',
     //   url: '/menu/incoming-goods',
     //   icon: 'albums'
     // },

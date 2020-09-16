@@ -20,8 +20,9 @@
               <div class="col-7">
                 <ion-input [(ngModel)]="Serial"></ion-input>
               </div>
-              <ion-icon name="save" (click)="SaveAssetLocationInfo()"></ion-icon>
-              <ion-icon name="barcode" (click)="Scan()"></ion-icon>
+              <ion-button size="default" color="success" (click)="Save()"><ion-icon name="save"></ion-icon></ion-button>
+              <div style="margin-right: 5px;"></div>
+              <ion-button size="default" (click)="Scan()"><ion-icon name="barcode"></ion-icon></ion-button>
             </ion-item>
           </div>
         </div>
@@ -75,7 +76,7 @@
                       </ion-item>
                       <ion-item>
                         <div class="col-12" style="text-align: right;">
-                          <ion-button color="success" slot="end" (click)="Save()">บันทึก</ion-button>
+                          <ion-button color="success" slot="end" (click)="Update()">บันทึก</ion-button>
                         </div>
                       </ion-item>
                     </div>
@@ -110,6 +111,7 @@
                                   <th> Asset No </th>
                                   <th> คำอธิบาย/รายละเอียด </th>
                                   <th></th>
+                                  <th></th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -119,6 +121,9 @@
                                   <td> <input type="text" [(ngModel)]="item.Description" style="width: 120px" /></td>
                                   <td>
                                     <ion-button color="warning" (click)="Edit(item)" style="height: 25px!important;"> บันทึก </ion-button>
+                                  </td>
+                                  <td>
+                                    <ion-button color="danger" (click)="Delete(item.AssetID)" style="height: 25px!important;"> ลบ </ion-button>
                                   </td>
                                 </tr>
                               </tbody>

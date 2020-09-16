@@ -19,7 +19,7 @@
             </div>
             <div class="portlet-body" style="padding: 2px;">
               <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6">
                   <ion-item>
                     <div class="col-4">
                       <ion-label>สินค้า / SKU</ion-label>
@@ -56,7 +56,7 @@
                       <ion-label>Lot / Batch</ion-label>
                     </div>
                     <div class="col-8">
-                      <ion-input [(ngModel)]="Lot"></ion-input>
+                      <ion-input [(ngModel)]="LotNo"></ion-input>
                     </div>
                   </ion-item>
                   <ion-item>
@@ -72,7 +72,7 @@
                     </div>
                   </ion-item>
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6">
                   <ion-item>
                     <div class="col-4">
                       <ion-label>SKUCode</ion-label>
@@ -106,6 +106,7 @@
                     </div>
                   </ion-item>
                   <ion-item>
+                    <ion-button color="medium" slot="end" (click)="Reset()">รีเซ็ต</ion-button>
                   <ion-button color="primary" slot="end" (click)="Search()">ค้นหา</ion-button>
                 </ion-item>
                 </div>
@@ -125,12 +126,12 @@
             </div>
             <div class="portlet-body" style="padding: 2px;">
               <div class="row">
-                <div class="col-12" style="text-align: center; margin-top: 20px;" #lblWait
-                  *ngIf="AssetLocationList == null; else lblWait">
-                  <label>ไม่พบข้อมูล</label>
-                </div>
-                <div class="col-lg-12" *ngIf="AssetLocationList != null; else lbltable">
-                  <div class="portlet light " #lbltable>
+                <div class="col-12" style="text-align: center; margin-top: 20px;"
+                              *ngIf="list == false">
+                              <label>ไม่พบข้อมูล</label>
+                            </div>
+                <div class="col-lg-12" *ngIf="list != false">
+                  <div class="portlet light">
                     <div class="portlet-body">
                       <div class="table-scrollable">
                         <table class="table table-hover">

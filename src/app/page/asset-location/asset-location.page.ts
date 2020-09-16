@@ -26,6 +26,7 @@ export class AssetLocationPage implements OnInit {
   Time = 5;
   asset;
   limit;
+  list;
 
   constructor(private service: WebserviceService,
     public navCtrl: NavController,) {
@@ -70,6 +71,7 @@ export class AssetLocationPage implements OnInit {
   }
 
   Search() {
+    this.list = true;
     let AssetLocationList = {
       Type: "AssetLocationList",
       SKUID: this.SKUID,
@@ -84,11 +86,24 @@ export class AssetLocationPage implements OnInit {
     }
     this.service.AssetLocationController(AssetLocationList).then(AssetLocationList => {
       this.asset = AssetLocationList
-      console.log(this.asset);
+      console.log(this.asset.length);
       this.AssetLocationList = [];
-      for (let i = 0; i < 20; i++) {
-        this.AssetLocationList.push(this.asset[i]);
+      if (this.asset.length == 0) {
+        this.list = false;
+      }else{
+        if (this.asset.length > 20) {
+          for (let i = 0; i < 20; i++) {
+            this.AssetLocationList.push(this.asset[i]);
+          }
+        } else {
+          for (let i = 0; i < this.asset.length; i++) {
+            this.AssetLocationList.push(this.asset[i]);
+          }
+          this.list = true;
+        }
       }
+      console.log(this.list);
+            
     });
   }
 
@@ -104,13 +119,29 @@ export class AssetLocationPage implements OnInit {
     this.navCtrl.navigateForward(['/asset-location-info'], navigationExtras);
   }
 
-  doInfinite(infiniteScroll) {
-    this.limit = this.AssetLocationList.length;
-    setTimeout(() => {
-      infiniteScroll.target.complete();
-      for (let i = this.limit; i < this.limit + 20; i++) {
-        this.AssetLocationList.push(this.asset[i]);
-      }
-    }, 500);
+  doInfinite(infiniteScroll) {    
+    console.log(this.AssetLocationList.length);
+      this.limit = this.AssetLocationList.length;
+      setTimeout(() => {
+        infiniteScroll.target.complete();
+        if (this.asset.length != this.limit) {
+          for (let i = this.limit; i < this.limit + 10; i++) {
+            this.AssetLocationList.push(this.asset[i]);
+          }
+        }        
+      }, 500);
+  }
+
+  Reset() {
+    this.SKUName = "";
+    this.SKUID = "";
+    this.ProductStatusID = "";
+    this.LotNo = "";
+    this.LocationID = "";
+    this.SkuCode = "";
+    this.DocNo = "";
+    this.PRNo = "";
+    this.Ref = "";
+    this.Search();
   }
 }

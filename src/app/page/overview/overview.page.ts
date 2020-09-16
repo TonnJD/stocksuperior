@@ -37,6 +37,8 @@ export class OverviewPage implements OnInit {
   VersionNumber;
   statusversion;
   link;
+  txtSearch;
+  isItemAvailable;
 
   constructor(private storageService: StorageService,
     public webservice: WebserviceService,
@@ -60,7 +62,7 @@ export class OverviewPage implements OnInit {
     this.checkversion();
     this.getUser();
     this.loadStock();
-    this.onChange("69");
+    this.onChange("1601");
   }
 
   getUser() {
@@ -86,13 +88,26 @@ export class OverviewPage implements OnInit {
       Type: "GetProductList",
       ProductTypeID: item
     }
+    console.log(Product);
+    
     this.webservice.Overview(Product).then(ProductList => {
       this.list = ProductList
+      console.log(this.list);
+      this.ProductList = [];
       if (this.list != false) {
-        for (let i = 0; i < 35; i++) {
-          this.ProductList.push(this.list[i]);
+        console.log(this.list.length);
+        
+        if (this.list.length > 20) {
+          for (let i = 0; i < 20; i++) {
+            this.ProductList.push(this.list[i]);
+          }
+        }else{
+          for (let i = 0; i < this.list.length; i++) {
+            this.ProductList.push(this.list[i]);
+          }
         }
         console.log(this.ProductList);
+        
       }
     });
   }
@@ -106,8 +121,10 @@ export class OverviewPage implements OnInit {
       this.limit = this.ProductList.length;
       setTimeout(() => {
         infiniteScroll.target.complete();
-        for (let i = this.limit; i < this.limit + 10; i++) {
-          this.ProductList.push(this.list[i]);
+        if (this.list.length != this.limit) {
+          for (let i = this.limit; i < this.limit + 10; i++) {
+            this.ProductList.push(this.list[i]);
+          }
         }
       }, 500);
     }
@@ -181,5 +198,19 @@ export class OverviewPage implements OnInit {
       });
   }
   //#endregion
+  getItems(ev: any) {
+    console.log(ev.target.value);
+    
+    // Reset items back to all of the items
 
+    // set val to the value of the searchbar
+    const val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() !== '') {
+      
+    } else {
+      
+    }
+}
 }

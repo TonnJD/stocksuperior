@@ -32,8 +32,8 @@
                     <ion-label>ประเภทสินค้า</ion-label>
                   </div>
                   <div class="col-8">
-                  <ion-select interface="popover" [(ngModel)]="ProductTypeID" (click)="onChange(item.ProductTypeID)">
-                    <ion-select-option *ngFor="let item of Product" [value]="item.ProductTypeID" [selected]="item.ProductTypeName">
+                  <ion-select interface="popover" [(ngModel)]="ProductTypeID">
+                    <ion-select-option *ngFor="let item of Product" (click)="onChange(item.ProductTypeID)" [value]="item.ProductTypeID" [selected]="item.ProductTypeName">
                       {{item.ProductTypeName}}</ion-select-option>
                   </ion-select>
                   </div>

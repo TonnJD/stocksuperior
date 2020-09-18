@@ -64,7 +64,7 @@ export class OverviewPage implements OnInit {
     this.getUser();
     this.loadStock();
     this.ProductTypeID = 1601;
-    this.onChange(this.ProductTypeID);
+    this.onChange(this.ProductTypeID,"product");
   }
 
   getUser() {
@@ -85,10 +85,15 @@ export class OverviewPage implements OnInit {
     });
   }
 
-  onChange(item) {
+  onChange(value,type) {
+    if (type == 'product') {
+      this.ProductTypeID = value;
+    }else{
+      this.ProductTypeID = value.detail.value;
+    }    
     let Product = {
       Type: "GetProductList",
-      ProductTypeID: item
+      ProductTypeID: this.ProductTypeID
     }
     console.log(Product);
     

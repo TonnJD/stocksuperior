@@ -116,7 +116,7 @@ export class AssetLocationInfoPage implements OnInit {
       console.log('Barcode data', barcodeData);
       let barcode = barcodeData;
       this.Serial = barcode.text;
-      if (this.Serial != null) {
+      if (this.Serial != null || this.Serial != "") {
         this.SerialNo = this.Serial;
         this.SaveAssetLocationInfo();
       }

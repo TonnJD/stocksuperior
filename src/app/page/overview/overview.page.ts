@@ -39,6 +39,7 @@ export class OverviewPage implements OnInit {
   link;
   txtSearch;
   isItemAvailable;
+  ProductTypeID;
 
   constructor(private storageService: StorageService,
     public webservice: WebserviceService,
@@ -62,7 +63,8 @@ export class OverviewPage implements OnInit {
     this.checkversion();
     this.getUser();
     this.loadStock();
-    this.onChange("1601");
+    this.ProductTypeID = 1601;
+    this.onChange(this.ProductTypeID);
   }
 
   getUser() {

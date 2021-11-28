@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WebserviceService } from '../../webservice.service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-asset-location-info',
@@ -35,11 +35,13 @@ export class AssetLocationInfoPage implements OnInit {
   AssetNo;
   Description;
   Serial;
+  eventType;
 
   constructor(private route: ActivatedRoute,
     private service: WebserviceService,
     private barcodeScanner: BarcodeScanner,
-    private alertController: AlertController) { }
+    private alertController: AlertController,
+    private toastCtrl: ToastController) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -116,8 +118,9 @@ export class AssetLocationInfoPage implements OnInit {
       console.log('Barcode data', barcodeData);
       let barcode = barcodeData;
       this.Serial = barcode.text;
+
       if (this.Serial != null || this.Serial != "") {
-        this.SerialNo = this.Serial;
+        this.AssetNo = this.Serial;
         this.SaveAssetLocationInfo();
       }
     })
@@ -127,17 +130,26 @@ export class AssetLocationInfoPage implements OnInit {
   }
 
   Save(){    
+    // รับค่า AssetNo
+    this.eventType = 'Save';
+
     if (this.Serial == "") {
       this.alertNot();
-    }else{
-      this.SerialNo = this.Serial;
+    }
+    else
+    {
+      this.AssetNo = this.Serial;
+      this.SerialNo = '';
       this.SaveAssetLocationInfo();
     }
   }
+  
   SaveAssetLocationInfo() {
     if (this.CountSerial == this.CountAmount && this.AssetID == "") {
       this.alertNotSerial();
-    } else {
+    }
+    else
+    {
       let AssetLocationInfo = {
         Type: "SaveAssetLocationInfo",
         AssetID: this.AssetID,
@@ -155,25 +167,40 @@ export class AssetLocationInfoPage implements OnInit {
         Lot: this.LotNo,
         ProductStatusID: this.ProductStatusID
       }
-      console.log(AssetLocationInfo);
+      console.log('AssetLocationInfo', AssetLocationInfo);
 
       this.service.AssetLocationController(AssetLocationInfo).then(Status => {
-        console.log(Status);
+        console.log('Status', Status);
+
         if (Status == true) {
           this.SelectGridAssetLocationInfo();
           this.GetAmount();
           this.AssetID = "";
           this.Serial = "";
-        } else {
-          this.alertMeanSerial();
+          this.presentToast();
+        }
+        else
+        {
+          this.alertMeanSerial(this.eventType);
         }
       });
     }
   }
 
+  async presentToast() {
+    const toast = await this.toastCtrl.create({
+      //header: 'บันทึก',
+      message: 'บันทึกข้อมูลเรียบร้อยแล้ว',
+      color: 'success',
+      //mode: 'ios',
+      duration: 3000
+    });
+    toast.present();
+  }
 
   Edit(item) {
-    console.log(item);
+    console.log('edit item', item);
+    this.eventType = 'Edit';
     this.AssetID = item.AssetID
     this.SerialNo = item.SerialNo;
     this.AssetNo = item.AssetNo;
@@ -181,9 +208,18 @@ export class AssetLocationInfoPage implements OnInit {
     this.SaveAssetLocationInfo();
   }
 
-  async alertMeanSerial() {
+  async alertMeanSerial(type) {
+    let mess;
+    if (type == 'Save') {
+      mess = 'Asset No. นี้มีในระบบแล้ว';
+    }
+    else if (type == 'Edit')
+    {
+      mess = 'Serial No. หรือ Asset No. นี้มีในระบบแล้ว';
+    }
+
     const alert = await this.alertController.create({
-      message: 'Serial No หรือ Asset No นี้มีในระบบแล้ว',
+      message: mess,
       buttons: ['OK']
     });
     await alert.present();
@@ -191,7 +227,7 @@ export class AssetLocationInfoPage implements OnInit {
 
   async alertNot() {
     const alert = await this.alertController.create({
-      message: 'กรุณากรอก Serial',
+      message: 'กรุณากรอก Asset No.',
       buttons: ['OK']
     });
     await alert.present();
@@ -199,7 +235,7 @@ export class AssetLocationInfoPage implements OnInit {
 
   async alertNotSerial() {
     const alert = await this.alertController.create({
-      message: 'ไม่สามารถเพิ่มข้อมูล Serial ได้อีก เนื่องจากจำนวน Serial กับ จำนวนสินค้า เท่ากันแล้ว!',
+      message: 'ไม่สามารถเพิ่มข้อมูล Asset No. ได้อีก เนื่องจากจำนวน Asset No กับ จำนวนสินค้า เท่ากันแล้ว!',
       buttons: ['OK']
     });
     await alert.present();
@@ -224,10 +260,23 @@ export class AssetLocationInfoPage implements OnInit {
         this.GetAmount();
         this.AssetID = "";
         this.Serial = "";
+
+        this.deleteToast();
       } else {
 
       }
     });
+  }
+
+  async deleteToast() {
+    const toast = await this.toastCtrl.create({
+      //header: 'ลบ',
+      message: 'ลบข้อมูลเรียบร้อยแล้ว',
+      color: 'success',
+      //mode: 'ios',
+      duration: 3000
+    });
+    toast.present();
   }
 
 }

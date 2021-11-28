@@ -6,11 +6,17 @@ import { HttpClient, HttpRequest, HttpEvent, HttpHeaders } from '@angular/common
 })
 export class WebserviceService {
   
-  // apiServer_url = 'http://localhost:6369/';
+  //apiServer_url = 'https://localhost:6379';
 
-  // apiServer_url = 'https://wmstest.erpsuperior.com';
-  apiServer_url = 'https://wms.erpsuperior.com';
+  apiServer_url = 'https://wmstest.erpsuperior.com';
+  //apiServer_url = 'https://wms.erpsuperior.com';
   
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+
   constructor(private http: HttpClient) { }
 
    //#region Server

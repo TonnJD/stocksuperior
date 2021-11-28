@@ -10,24 +10,21 @@
 <ion-content>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12">
-        <div class="row">
-          <div class="col-lg-12">
-            <ion-item>
-              <div class="col-lg-1">
-                <ion-label>S/N</ion-label>
-              </div>
-              <div class="col-lg-8">
-                <ion-input [(ngModel)]="Serial"></ion-input>
-              </div>
-              <div class="col-lg-3">
-              <ion-button size="default" color="success" (click)="Save()"><ion-icon name="save"></ion-icon></ion-button>
-              <div style="margin-right: 5px;"></div>
-              <ion-button size="default" (click)="Scan()"><ion-icon name="barcode"></ion-icon></ion-button>
-            </div>
-            </ion-item>
+      <div class="col-md-12">
+        <ion-item>
+          <div class="col-9">
+            <ion-input [(ngModel)]="Serial" placeholder="A/N"></ion-input>
           </div>
-        </div>
+          <div class="col-3">
+            <ion-button size="small" color="success" (click)="Save()">
+              <ion-icon name="save"></ion-icon>
+            </ion-button>
+            <div style="margin-right: 5px;"></div>
+            <ion-button size="small" (click)="Scan()">
+              <ion-icon name="barcode"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-item>
       </div>
       <div class="col-lg-8">
         <div class="page-content-inner" style="display: none;">
@@ -36,8 +33,11 @@
               <div class="portlet box blue">
                 <div class="portlet-title">
                   <div class="caption">
-                    <i class="fa fa-th-large" style="font-size: 1em;"></i>ข้อมูลสินค้ารายชิ้น</div>
-                    <div class="tools"><ion-icon slot="end" name="close" (click)="close()"></ion-icon></div>
+                    <i class="fa fa-th-large" style="font-size: 1em;"></i>ข้อมูลสินค้ารายชิ้น
+                  </div>
+                  <div class="tools">
+                    <ion-icon slot="end" name="close" (click)="close()"></ion-icon>
+                  </div>
                 </div>
                 <div class="portlet-body" style="padding: 2px;">
                   <div class="row">
@@ -94,10 +94,11 @@
               <div class="portlet box blue">
                 <div class="portlet-title">
                   <div class="caption">
-                    <i class="fa fa-th-large" style="font-size: 1em;"></i>ทะเบียนสินค้า</div>
+                    <i class="fa fa-th-large" style="font-size: 1em;"></i>ทะเบียนสินค้า
+                  </div>
                 </div>
                 <div class="portlet-body" style="padding: 2px;">
-    
+
                   <div class="row">
                     <div class="col-12" style="text-align: center; margin-top: 20px;" *ngIf="AssetLocationInfo == null">
                       <label>ไม่พบข้อมูล</label>
@@ -111,7 +112,7 @@
                                 <tr>
                                   <th style="background-color: #D24667;color: white;"> Serial No </th>
                                   <th style="background-color: #D24667;color: white;"> Asset No </th>
-                                  <th style="background-color: #D24667;color: white;"> คำอธิบาย/รายละเอียด </th>
+                                  <!-- <th style="background-color: #D24667;color: white;"> คำอธิบาย/รายละเอียด </th> -->
                                   <th style="background-color: #D24667;color: white;"></th>
                                   <th style="background-color: #D24667;color: white;"></th>
                                 </tr>
@@ -120,12 +121,14 @@
                                 <tr *ngFor="let item of AssetLocationInfo; let i = index">
                                   <td> <input type="text" [(ngModel)]="item.SerialNo" style="width: 120px" /></td>
                                   <td> <input type="text" [(ngModel)]="item.AssetNo" style="width: 120px" /></td>
-                                  <td> <input type="text" [(ngModel)]="item.Description" style="width: 120px" /></td>
+                                  <!-- <td> <input type="text" [(ngModel)]="item.Description" style="width: 120px" /></td> -->
                                   <td>
-                                    <ion-button color="warning" (click)="Edit(item)" style="height: 25px!important;"> บันทึก </ion-button>
+                                    <ion-button color="warning" (click)="Edit(item)" style="height: 25px!important;">
+                                      บันทึก </ion-button>
                                   </td>
                                   <td>
-                                    <ion-button color="danger" (click)="Delete(item.AssetID)" style="height: 25px!important;"> ลบ </ion-button>
+                                    <ion-button color="danger" (click)="Delete(item.AssetID)"
+                                      style="height: 25px!important;"> ลบ </ion-button>
                                   </td>
                                 </tr>
                               </tbody>
@@ -148,9 +151,10 @@
               <div class="portlet box blue">
                 <div class="portlet-title">
                   <div class="caption">
-                    <i class="fa fa-th-large" style="font-size: 1em;"></i>ข้อมูลสินค้า</div>
+                    <i class="fa fa-th-large" style="font-size: 1em;"></i>ข้อมูลสินค้า
+                  </div>
                 </div>
-                <div class="portlet-body" style="padding: 2px;">                 
+                <div class="portlet-body" style="padding: 2px;">
                   <div class="row">
                     <div class="col-12">
                       <ion-item>

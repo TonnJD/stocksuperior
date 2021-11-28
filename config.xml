@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.stock" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Stock</name>
-    <description>Stock by Wingplus</description>
+<widget id="io.ionic.stock_Test" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>WMS Superior Test</name>
+    <description>WMS Superior by Wingplus</description>
     <author email="PM@WingPlusSolution.com" href="https://www.wingplussolution.com/">WingPlusSolution</author>
     <content src="index.html" />
     <access origin="*" />

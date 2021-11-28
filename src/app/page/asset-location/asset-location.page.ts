@@ -41,7 +41,7 @@ export class AssetLocationPage implements OnInit {
     this.Ref = "";
 
     this.AssetLocationList = [];
-    this.Search();
+    //this.Search();
   }
 
   ngOnInit() {
@@ -55,12 +55,14 @@ export class AssetLocationPage implements OnInit {
     this.service.AssetLocationController(SKU).then(SKU => {
       this.SKU = SKU;
     });
+
     let ProductStatus = {
       Type: "ProductStatus",
     }
     this.service.AssetLocationController(ProductStatus).then(ProductStatus => {
       this.ProductStatus = ProductStatus;
     });
+
     let Location = {
       Type: "Location",
     }
@@ -72,10 +74,11 @@ export class AssetLocationPage implements OnInit {
 
   Search() {
     this.list = true;
+
     let AssetLocationList = {
       Type: "AssetLocationList",
-      SKUID: this.SKUID,
-      SKUName: this.SKUName,
+      SKUID: this.SKUID, //ประเภทสินค้า
+      SKUName: this.SKUName, //ชื่อสินค้า/SKU Name
       ProductStatusID: this.ProductStatusID,
       LotNo: this.LotNo,
       LocationID: this.LocationID,
@@ -84,18 +87,26 @@ export class AssetLocationPage implements OnInit {
       PRNo: this.PRNo,
       Ref: this.Ref,
     }
+
+    console.log('AssetLocationList', AssetLocationList);
+    
+
     this.service.AssetLocationController(AssetLocationList).then(AssetLocationList => {
       this.asset = AssetLocationList
       console.log(this.asset.length);
+
       this.AssetLocationList = [];
+
       if (this.asset.length == 0) {
         this.list = false;
-      }else{
+      }
+      else{
         if (this.asset.length > 20) {
           for (let i = 0; i < 20; i++) {
             this.AssetLocationList.push(this.asset[i]);
           }
-        } else {
+        }
+        else {
           for (let i = 0; i < this.asset.length; i++) {
             this.AssetLocationList.push(this.asset[i]);
           }
@@ -116,6 +127,7 @@ export class AssetLocationPage implements OnInit {
         data: JSON.stringify(params)
       }
     };
+    
     this.navCtrl.navigateForward(['/asset-location-info'], navigationExtras);
   }
 
